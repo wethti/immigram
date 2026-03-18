@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luminary — PR Agency for EB-1 & O-1 Visa Applicants</title>
+  <meta name="description" content="We build the public profile that immigration attorneys need. Media features, conference speaking, and expert judging — engineered for EB-1 and O-1 visa approval." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0C0B09;
+      --bg-2:     #141210;
+      --bg-3:     #1A1815;
+      --border:   #252220;
+      --border-2: #302C28;
+      --gold:     #C8A96E;
+      --gold-dim: #8A7249;
+      --gold-faint: rgba(200,169,110,0.08);
+      --text:     #F0EBE1;
+      --text-2:   #A89F91;
+      --text-3:   #6B6259;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Plus Jakarta Sans', system-ui, sans-serif;
+      --mono:     'DM Mono', monospace;
+      --radius:   12px;
+      --radius-lg: 20px;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ─── Skip to content ───────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--gold);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ─── Grain overlay ─────────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ─── Nav ───────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(12,11,9,0.85);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.2s var(--ease-spring);
+    }
+    .nav-cta:hover { opacity: 0.9; transform: scale(1.03); }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      padding: 8rem 3rem 4rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-line {
+      position: absolute;
+      top: 0; left: 50%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+      opacity: 0.4;
+    }
+
+    .hero-left {
+      padding-right: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-label.visible { opacity: 1; transform: translateY(0); }
+
+    .hero-heading {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s var(--ease-out) 0.1s, transform 0.8s var(--ease-out) 0.1s;
+    }
+    .hero-heading.visible { opacity: 1; transform: translateY(0); }
+    .hero-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-2);
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s var(--ease-out) 0.2s, transform 0.8s var(--ease-out) 0.2s;
+    }
+    .hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s var(--ease-out) 0.3s, transform 0.8s var(--ease-out) 0.3s;
+    }
+    .hero-actions.visible { opacity: 1; transform: translateY(0); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.25s var(--ease-spring);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: scale(1.04); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .btn-ghost svg { transition: transform 0.25s var(--ease-spring); }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost:hover svg { transform: translateX(4px); }
+
+    /* Hero right — stat card stack */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.9s var(--ease-out) 0.25s, transform 0.9s var(--ease-out) 0.25s;
+    }
+    .hero-right.visible { opacity: 1; transform: translateX(0); }
+
+    .stat-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+      opacity: 0.5;
+    }
+    .stat-card-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.5rem;
+    }
+    .stat-card-value {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .stat-card-value span { color: var(--gold); }
+    .stat-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .stat-card-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .stat-card-inline .stat-part {
+      padding: 1.5rem 2rem;
+    }
+    .stat-card-inline .stat-part + .stat-part {
+      border-left: 1px solid var(--border);
+    }
+
+    .hero-scroll {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 2rem;
+      opacity: 0;
+      transition: opacity 1.2s var(--ease-out) 0.8s;
+    }
+    .hero-scroll.visible { opacity: 1; }
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--border-2);
+    }
+    .hero-scroll span {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ─── Trust bar ─────────────────────────────────────────────────── */
+    #trust {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      overflow: hidden;
+    }
+    .trust-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .trust-track-wrap {
+      overflow: hidden;
+      flex: 1;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    .trust-track {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      animation: scroll-trust 28s linear infinite;
+      width: max-content;
+    }
+    @keyframes scroll-trust {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .trust-track span {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-3);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+    .trust-track:hover { animation-play-state: paused; }
+    .trust-track span:hover { color: var(--text-2); }
+
+    /* ─── Section shell ─────────────────────────────────────────────── */
+    section { padding: 7rem 3rem; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .section-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ─── Reveal animations ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ─── Insight / Problem ─────────────────────────────────────────── */
+    #insight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .insight-left .section-label { margin-bottom: 1.5rem; }
+    .insight-left .section-heading { margin-bottom: 1.5rem; }
+
+    .insight-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .insight-body p + p { margin-top: 1.2rem; }
+    .insight-body strong { color: var(--text); font-weight: 500; }
+
+    .insight-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .insight-item {
+      background: var(--bg-2);
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      transition: background 0.25s;
+    }
+    .insight-item:hover { background: var(--bg-3); }
+
+    .insight-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--gold-dim);
+      margin-top: 0.2rem;
+    }
+    .insight-item-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+    .insight-item-desc {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ─── Stats bento ───────────────────────────────────────────────── */
+    #stats {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 3rem;
+    }
+
+    .stats-heading {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+
+    .bento-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .bento-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 0% 0%, var(--gold-faint), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .bento-card:hover::before { opacity: 1; }
+
+    .bc-1 { grid-column: span 5; }
+    .bc-2 { grid-column: span 4; }
+    .bc-3 { grid-column: span 3; }
+    .bc-4 { grid-column: span 6; }
+    .bc-5 { grid-column: span 6; }
+    .bc-6 { grid-column: span 4; }
+    .bc-7 { grid-column: span 4; }
+    .bc-8 { grid-column: span 4; }
+
+    .bento-stat-num {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .bento-stat-num span { color: var(--gold); }
+
+    .bento-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.5;
+      max-width: 200px;
+    }
+
+    .bento-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid var(--gold-dim);
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .bento-quote {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .bento-mini-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+    .bento-mini-list li {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .bento-mini-list li::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .bento-bar-wrap {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .bento-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .bento-bar-name {
+      font-size: 0.78rem;
+      color: var(--text-2);
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .bento-bar-track {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .bento-bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.2s var(--ease-out);
+    }
+    .bento-bar-pct {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ─── Services ──────────────────────────────────────────────────── */
+    #services { position: relative; }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+    .services-header .section-heading { margin-top: 0.5rem; }
+    .services-header-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .services-intro {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-2);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 1px;
+    }
+
+    .service-content {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: var(--bg-2);
+      transition: background 0.3s;
+    }
+    .service-row:hover .service-content { background: var(--bg-3); }
+
+    .service-index {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+    .service-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-2);
+      max-width: 440px;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .service-features li {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      display: grid;
+      grid-template-columns: 1rem 1fr;
+      gap: 0.5rem;
+      align-items: start;
+    }
+    .service-features li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .service-visual {
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Service visual: Publications */
+    .pub-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 300px;
+    }
+    .pub-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: transform 0.3s var(--ease-spring), border-color 0.3s;
+    }
+    .service-row:hover .pub-card { border-color: var(--border-2); }
+    .service-row:hover .pub-card:nth-child(1) { transform: translateX(-4px); }
+    .service-row:hover .pub-card:nth-child(2) { transform: translateX(4px); }
+    .service-row:hover .pub-card:nth-child(3) { transform: translateX(-2px); }
+    .service-row:hover .pub-card:nth-child(4) { transform: translateX(6px); }
+    .pub-logo {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 80px;
+    }
+    .pub-type {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+    .pub-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-left: auto;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* Service visual: Speaking */
+    .speak-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: 280px;
+    }
+    .speak-stage {
+      width: 100%;
+      height: 8px;
+      background: var(--border-2);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .speak-stage::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 100%;
+      background: var(--gold);
+      border-radius: var(--radius);
+      opacity: 0.6;
+    }
+    .speak-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .speak-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.1rem;
+      transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .service-row:hover .speak-card:nth-child(odd) { transform: translateX(-3px); border-color: var(--border-2); }
+    .service-row:hover .speak-card:nth-child(even) { transform: translateX(3px); border-color: var(--border-2); }
+    .speak-conf {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .speak-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+
+    /* Service visual: Judging */
+    .judge-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 280px;
+    }
+    .judge-badge {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--bg-2);
+      border: 1px solid var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.4s var(--ease-spring);
+    }
+    .service-row:hover .judge-badge { transform: scale(1.08); border-color: var(--gold); }
+    .judge-badge svg {
+      width: 32px; height: 32px;
+      color: var(--gold);
+    }
+    .judge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .judge-item {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.8rem 1.1rem;
+      font-size: 0.82rem;
+      color: var(--text-2);
+      transition: border-color 0.3s;
+    }
+    .service-row:hover .judge-item { border-color: var(--border-2); }
+    .judge-item strong { color: var(--text); }
+
+    /* Reversed row */
+    .service-row.reversed .service-content { order: 2; }
+    .service-row.reversed .service-visual {
+      order: 1;
+      border-left: none;
+      border-right: 1px solid var(--border);
+    }
+
+    /* ─── Process ───────────────────────────────────────────────────── */
+    #process {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+    .process-header .section-heading { margin-top: 0.5rem; }
+    .process-note {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .process-step {
+      background: var(--bg);
+      padding: 2.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+    .process-step:hover { background: var(--bg-3); }
+
+    .process-step-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+    .process-step-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .process-step-desc {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .process-step-arrow {
+      position: absolute;
+      top: 2.5rem;
+      right: -0.75rem;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--gold-dim);
+      z-index: 1;
+    }
+    .process-step-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -3px;
+      width: 6px;
+      height: 6px;
+      border-top: 1px solid var(--gold-dim);
+      border-right: 1px solid var(--gold-dim);
+      transform: rotate(45deg);
+    }
+    .process-step:last-child .process-step-arrow { display: none; }
+
+    /* ─── Packages ──────────────────────────────────────────────────── */
+    #packages .packages-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    #packages .packages-header .section-label {
+      justify-content: center;
+    }
+    #packages .packages-header .section-label::before { display: none; }
+    #packages .packages-header .section-heading {
+      margin-top: 0.5rem;
+    }
+    .packages-note {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      margin-top: 0.75rem;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .pkg-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .pkg-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    .pkg-card.featured {
+      border-color: var(--gold-dim);
+      background: var(--bg-3);
+    }
+    .pkg-card.featured:hover { border-color: var(--gold); }
+
+    .pkg-featured-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .pkg-tier {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.25rem;
+    }
+    .pkg-name {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .pkg-tagline {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+    .pkg-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.75rem;
+    }
+    .pkg-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+    .pkg-features li {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      display: grid;
+      grid-template-columns: 1rem 1fr;
+      gap: 0.5rem;
+      align-items: start;
+    }
+    .pkg-features li .check {
+      color: var(--gold);
+      margin-top: 0.05rem;
+      font-size: 0.8rem;
+    }
+    .pkg-features li.muted { color: var(--text-3); }
+    .pkg-features li.muted .check { color: var(--text-3); }
+
+    .pkg-cta {
+      display: block;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.875rem;
+      border-radius: 100px;
+      border: 1px solid var(--border-2);
+      color: var(--text-2);
+      transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.25s var(--ease-spring);
+    }
+    .pkg-cta:hover {
+      border-color: var(--text-2);
+      color: var(--text);
+      transform: scale(1.02);
+    }
+    .pkg-card.featured .pkg-cta {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .pkg-card.featured .pkg-cta:hover { opacity: 0.88; }
+
+    /* ─── Testimonials ──────────────────────────────────────────────── */
+    #testimonials {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .testimonials-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      margin-bottom: 3.5rem;
+      gap: 2rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .testi-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .testi-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-3px);
+    }
+
+    .testi-quote {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--text);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .testi-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .testi-role {
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+    .testi-visa {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid var(--gold-dim);
+      border-radius: 100px;
+      padding: 0.2rem 0.6rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── FAQ ───────────────────────────────────────────────────────── */
+    #faq {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .faq-left { position: sticky; top: 8rem; }
+    .faq-left .section-heading { margin-top: 0.5rem; margin-bottom: 1rem; }
+    .faq-left-desc {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+      transition: background 0.3s;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item.open { background: var(--bg-3); }
+
+    .faq-q {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-q-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease-spring), border-color 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      border-color: var(--gold-dim);
+    }
+    .faq-icon svg { width: 12px; height: 12px; color: var(--text-2); }
+
+    .faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease-out);
+    }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-a-inner {
+      overflow: hidden;
+    }
+    .faq-a-inner p {
+      padding: 0 2rem 1.5rem;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--text-2);
+    }
+
+    /* ─── CTA ───────────────────────────────────────────────────────── */
+    #cta {
+      margin: 0 3rem 7rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 6rem 4rem;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(200,169,110,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    #cta::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 10%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(200,169,110,0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .cta-heading em { font-style: italic; color: var(--gold); }
+    .cta-sub {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cta-input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.25s;
+      width: 100%;
+    }
+    .cta-input::placeholder { color: var(--text-3); }
+    .cta-input:focus { border-color: var(--gold-dim); }
+    .cta-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      color: var(--text-2);
+      outline: none;
+      transition: border-color 0.25s;
+      width: 100%;
+      cursor: pointer;
+      appearance: none;
+    }
+    .cta-select:focus { border-color: var(--gold-dim); }
+    .cta-submit {
+      background: var(--gold);
+      border: none;
+      border-radius: 100px;
+      padding: 0.9rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--bg);
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.25s var(--ease-spring);
+      width: 100%;
+    }
+    .cta-submit:hover { opacity: 0.88; transform: scale(1.02); }
+
+    .cta-trust {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+    .cta-trust::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      flex-shrink: 0;
+    }
+
+    /* ─── Footer ────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+    .footer-col-heading {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--text-2); }
+
+    /* ─── Mobile nav toggle ─────────────────────────────────────────── */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: transform 0.3s var(--ease-spring), opacity 0.3s;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+
+      #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      .hero-bg-line { display: none; }
+      .hero-left { padding-right: 0; }
+      .hero-right { flex-direction: row; flex-wrap: wrap; }
+      .hero-right .stat-card { flex: 1; min-width: 200px; }
+      .hero-right .stat-card-inline { flex: 1 0 100%; }
+
+      #trust { padding: 1.5rem 2rem; }
+
+      section { padding: 5rem 2rem; }
+      #insight, .services-header, .process-header { grid-template-columns: 1fr; gap: 2rem; }
+      .insight-right { order: -1; }
+      .bento-grid { grid-template-columns: repeat(6, 1fr); }
+      .bc-1, .bc-4, .bc-5 { grid-column: span 6; }
+      .bc-2, .bc-3, .bc-6, .bc-7, .bc-8 { grid-column: span 3; }
+
+      .service-row { grid-template-columns: 1fr; }
+      .service-row.reversed .service-content { order: 0; }
+      .service-row.reversed .service-visual { order: 0; border-right: none; border-top: 1px solid var(--border); }
+      .service-visual { border-left: none; border-top: 1px solid var(--border); min-height: 240px; }
+      .service-content { padding: 2.5rem; }
+
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-step-arrow { display: none; }
+      .process-step:nth-child(2) .process-step-arrow { display: none; }
+
+      .packages-grid { grid-template-columns: 1fr; }
+      .pkg-card.featured { order: -1; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      #faq { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-left { position: static; }
+
+      #cta { grid-template-columns: 1fr; gap: 3rem; margin: 0 2rem 5rem; padding: 3rem 2rem; }
+
+      footer { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem 2rem; }
+      .footer-bottom { padding: 1.25rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-7, .bc-8 { grid-column: span 1; }
+      .process-grid { grid-template-columns: 1fr; }
+      .hero-right { flex-direction: column; }
+      .stat-card-inline { grid-template-columns: 1fr; }
+      .stat-card-inline .stat-part + .stat-part { border-left: none; border-top: 1px solid var(--border); }
+      footer { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+  <nav id="nav" role="navigation" aria-label="Main">
+    <a href="#hero" class="nav-logo">Luminary<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How it works</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Book a consultation</a>
+    <button class="nav-burger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main id="main">
+
+    <!-- ─── HERO ──────────────────────────────────────────────────── -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg-line" aria-hidden="true"></div>
+
+      <div class="hero-left">
+        <div class="hero-label reveal">EB-1 · O-1 · PR Strategy</div>
+
+        <h1 class="hero-heading reveal" id="hero-heading">
+          Build the profile<br>that wins your<br><em>extraordinary</em><br>visa case.
+        </h1>
+
+        <p class="hero-sub reveal">
+          Immigration attorneys need proof of recognition — media features, conference stages, expert panels. We build that evidence, from first pitch to final placement, so your petition stands on solid ground.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#cta" class="btn-primary">
+            Get a profile audit
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5"/></svg>
+          </a>
+          <a href="#services" class="btn-ghost">
+            See how it works
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-right reveal-right">
+        <div class="stat-card">
+          <div class="stat-card-label">Placements delivered</div>
+          <div class="stat-card-value"><span class="counter" data-target="2400">0</span><span>+</span></div>
+          <div class="stat-card-desc">Media features, speaking slots &amp; judging credits since 2019</div>
+        </div>
+
+        <div class="stat-card stat-card-inline">
+          <div class="stat-part">
+            <div class="stat-card-label">Avg. time to first placement</div>
+            <div class="stat-card-value" style="font-size:2rem;"><span>3</span><span style="font-size:1.1rem;color:var(--text-2);margin-left:4px;">weeks</span></div>
+          </div>
+          <div class="stat-part">
+            <div class="stat-card-label">Attorney-ready packages</div>
+            <div class="stat-card-value" style="font-size:2rem;"><span class="counter" data-target="98">0</span><span style="font-size:1.1rem;color:var(--gold);">%</span></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-label">Outlets we place in</div>
+          <div class="stat-card-value"><span class="counter" data-target="340">0</span><span>+</span></div>
+          <div class="stat-card-desc">From Forbes &amp; Wired to niche industry journals that carry weight with USCIS</div>
+        </div>
+      </div>
+
+      <div class="hero-scroll reveal">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll to explore</span>
+      </div>
+    </section>
+
+    <!-- ─── TRUST BAR ─────────────────────────────────────────────── -->
+    <div id="trust" role="complementary" aria-label="Featured in">
+      <span class="trust-label">Featured in</span>
+      <div class="trust-track-wrap">
+        <div class="trust-track" aria-hidden="true">
+          <!-- doubled for seamless loop -->
+          <span>Forbes</span>
+          <span>TechCrunch</span>
+          <span>Bloomberg</span>
+          <span>Wired</span>
+          <span>Inc.</span>
+          <span>Fast Company</span>
+          <span>MIT Technology Review</span>
+          <span>VentureBeat</span>
+          <span>Business Insider</span>
+          <span>The Information</span>
+          <span>Forbes</span>
+          <span>TechCrunch</span>
+          <span>Bloomberg</span>
+          <span>Wired</span>
+          <span>Inc.</span>
+          <span>Fast Company</span>
+          <span>MIT Technology Review</span>
+          <span>VentureBeat</span>
+          <span>Business Insider</span>
+          <span>The Information</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── INSIGHT ────────────────────────────────────────────────── -->
+    <section id="insight" aria-labelledby="insight-heading">
+      <div class="insight-left reveal-left">
+        <div class="section-label">The evidence problem</div>
+        <h2 class="section-heading" id="insight-heading">
+          Your work is extraordinary.<br>
+          Your <em>record</em> needs to prove it.
+        </h2>
+        <div class="insight-body">
+          <p>
+            USCIS evaluates EB-1A, EB-1B, and O-1 petitions against a strict checklist: <strong>published articles about you</strong>, <strong>judging the work of others</strong>, and <strong>invited speaking roles</strong> are among the most powerful criteria.
+          </p>
+          <p>
+            Most talented professionals have the expertise but lack the documented public footprint. Immigration attorneys can craft the strongest possible petition — but only when the evidence is already in place.
+          </p>
+          <p>
+            That's the gap we close. Luminary is the PR infrastructure your immigration case depends on, run by journalists, editors, and conference producers who know exactly what carries weight.
+          </p>
+        </div>
+      </div>
+
+      <div class="insight-right reveal-right">
+        <div class="insight-item">
+          <div class="insight-num">01</div>
+          <div>
+            <div class="insight-item-title">Published media coverage about you</div>
+            <div class="insight-item-desc">Articles in major trade and national outlets that name you as a leading expert in your field — not bylines you wrote, but coverage you earned.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">02</div>
+          <div>
+            <div class="insight-item-title">Invited conference speaking</div>
+            <div class="insight-item-desc">Documented invitations to speak at industry conferences establish your standing as a recognized authority. We secure the slot and provide proof for your attorney.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">03</div>
+          <div>
+            <div class="insight-item-title">Expert judging &amp; panel participation</div>
+            <div class="insight-item-desc">Serving as a judge — at hackathons, awards, or grant committees — demonstrates that peers defer to your expertise. This criterion is often decisive for borderline cases.</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">04</div>
+          <div>
+            <div class="insight-item-title">Attorney-packaged evidence portfolio</div>
+            <div class="insight-item-desc">Every placement we deliver comes formatted — with URLs, publication dates, circulation data, and conference attendance figures — ready to drop into your I-140 exhibit list.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── STATS BENTO ───────────────────────────────────────────── -->
+    <section id="stats">
+      <div class="stats-heading reveal">
+        <div class="section-label" style="justify-content:center;"><span style="width:0"></span>By the numbers</div>
+        <h2 class="section-heading" style="margin-top:0.5rem;">A track record attorneys trust.</h2>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bc-1 reveal">
+          <div class="bento-tag">Clients served</div>
+          <div class="bento-stat-num"><span class="counter" data-target="830">0</span><span>+</span></div>
+          <div class="bento-stat-label">Professionals across tech, science, arts &amp; business who built their USCIS evidence with us</div>
+        </div>
+
+        <div class="bento-card bc-2 reveal delay-1">
+          <div class="bento-tag">Approval rate</div>
+          <div class="bento-stat-num"><span class="counter" data-target="94">0</span><span style="color:var(--gold)">%</span></div>
+          <div class="bento-stat-label">Of clients who completed a full package received an approved petition on first filing</div>
+        </div>
+
+        <div class="bento-card bc-3 reveal delay-2">
+          <div class="bento-tag">Countries</div>
+          <div class="bento-stat-num"><span class="counter" data-target="48">0</span></div>
+          <div class="bento-stat-label">Nationalities successfully placed in US media &amp; events</div>
+        </div>
+
+        <div class="bento-card bc-4 reveal delay-1">
+          <div class="bento-tag">Outlet reach</div>
+          <div class="bento-stat-num" style="font-size:clamp(2rem,4vw,3.5rem);">
+            <span class="counter" data-target="2">0</span><span>B<span style="font-size:0.5em;color:var(--text-2);margin-left:4px;">combined readers/mo</span></span>
+          </div>
+          <div class="bento-stat-label">Across all media partners where we have active editorial relationships</div>
+          <div class="bento-bar-wrap">
+            <div class="bento-bar-row"><div class="bento-bar-name">Tech</div><div class="bento-bar-track"><div class="bento-bar-fill" data-width="88"></div></div><div class="bento-bar-pct">88%</div></div>
+            <div class="bento-bar-row"><div class="bento-bar-name">Business</div><div class="bento-bar-track"><div class="bento-bar-fill" data-width="76"></div></div><div class="bento-bar-pct">76%</div></div>
+            <div class="bento-bar-row"><div class="bento-bar-name">Science</div><div class="bento-bar-track"><div class="bento-bar-fill" data-width="61"></div></div><div class="bento-bar-pct">61%</div></div>
+            <div class="bento-bar-row"><div class="bento-bar-name">Arts</div><div class="bento-bar-track"><div class="bento-bar-fill" data-width="44"></div></div><div class="bento-bar-pct">44%</div></div>
+          </div>
+        </div>
+
+        <div class="bento-card bc-5 reveal delay-2">
+          <div class="bento-tag">Insight</div>
+          <div class="bento-quote">
+            "Immigration judges don't read your LinkedIn. They read what journalists wrote about you."
+          </div>
+          <div style="margin-top:1.25rem;">
+            <div class="bento-stat-label">— Recurring feedback from USCIS-certified immigration attorneys</div>
+          </div>
+          <ul class="bento-mini-list">
+            <li>Media coverage is weighted above self-authored articles</li>
+            <li>Speaking invitations must be documented with official letters</li>
+            <li>Judging roles require proof of evaluation, not just attendance</li>
+          </ul>
+        </div>
+
+        <div class="bento-card bc-6 reveal">
+          <div class="bento-tag">Speed</div>
+          <div class="bento-stat-num" style="font-size:2.8rem;">3<span style="font-size:1rem;color:var(--text-2);"> wks</span></div>
+          <div class="bento-stat-label">Median time from onboarding call to first live placement</div>
+        </div>
+
+        <div class="bento-card bc-7 reveal delay-1">
+          <div class="bento-tag">Placements</div>
+          <div class="bento-stat-num" style="font-size:2.8rem;"><span class="counter" data-target="2400">0</span><span>+</span></div>
+          <div class="bento-stat-label">Total earned media placements since founding</div>
+        </div>
+
+        <div class="bento-card bc-8 reveal delay-2">
+          <div class="bento-tag">Attorneys</div>
+          <div class="bento-stat-num" style="font-size:2.8rem;"><span class="counter" data-target="120">0</span><span>+</span></div>
+          <div class="bento-stat-label">Immigration law firms that recommend us to their clients</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SERVICES ──────────────────────────────────────────────── -->
+    <section id="services" aria-labelledby="services-heading">
+      <div class="services-header">
+        <div class="reveal-left">
+          <div class="section-label">What we do</div>
+          <h2 class="section-heading" id="services-heading">
+            Three services.<br>One outcome:<br><em>a compelling case.</em>
+          </h2>
+        </div>
+        <div class="services-header-right reveal-right">
+          <p class="services-intro">
+            Every engagement is built around the specific criteria your visa category requires. We identify which placements your attorney needs, then execute relentlessly until the evidence is in hand.
+          </p>
+        </div>
+      </div>
+
+      <!-- Service 1: Publications -->
+      <div class="service-row reveal">
+        <div class="service-content">
+          <div class="service-index">01 / Publications</div>
+          <h3 class="service-title">Your name, in the outlets that matter.</h3>
+          <p class="service-desc">
+            We pitch, place, and manage feature articles and expert quotes about you across a curated network of 340+ publications. Every piece is framed to satisfy USCIS's "published material about the beneficiary" criterion — with circulation data attached.
+          </p>
+          <ul class="service-features">
+            <li>Outlet selection mapped to your industry &amp; visa category</li>
+            <li>Custom-written pitch decks and story angles</li>
+            <li>Full editorial management through publication</li>
+            <li>Live URL, archive PDF, and circulation report for your attorney</li>
+            <li>Tier-1 placements available (Forbes, Bloomberg, TechCrunch)</li>
+          </ul>
+        </div>
+        <div class="service-visual">
+          <div class="pub-visual" aria-hidden="true">
+            <div class="pub-card">
+              <div>
+                <div class="pub-logo">Forbes</div>
+                <div class="pub-type">Feature · 2.4M readers</div>
+              </div>
+              <div class="pub-dot"></div>
+            </div>
+            <div class="pub-card">
+              <div>
+                <div class="pub-logo">Wired</div>
+                <div class="pub-type">Expert Quote · 1.1M readers</div>
+              </div>
+              <div class="pub-dot" style="animation-delay:0.4s"></div>
+            </div>
+            <div class="pub-card">
+              <div>
+                <div class="pub-logo">TechCrunch</div>
+                <div class="pub-type">Profile · 890K readers</div>
+              </div>
+              <div class="pub-dot" style="animation-delay:0.8s"></div>
+            </div>
+            <div class="pub-card">
+              <div>
+                <div class="pub-logo">Inc.</div>
+                <div class="pub-type">Thought Leadership</div>
+              </div>
+              <div class="pub-dot" style="animation-delay:1.2s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 2: Speaking -->
+      <div class="service-row reversed reveal">
+        <div class="service-content">
+          <div class="service-index">02 / Speaking</div>
+          <h3 class="service-title">A stage invitation is evidence. We get you invited.</h3>
+          <p class="service-desc">
+            An official speaking invitation from a recognized conference is one of the clearest signals of extraordinary ability. We manage your speaker profile, submit applications on your behalf, and secure the formal documentation your immigration attorney requires.
+          </p>
+          <ul class="service-features">
+            <li>Speaker bio and abstract crafted for high-acceptance rates</li>
+            <li>Applications submitted to 20+ conferences per quarter</li>
+            <li>Priority targeting of TED, SXSW, Web Summit, and domain-specific events</li>
+            <li>Official invitation letter obtained and formatted</li>
+            <li>Virtual panel spots available when in-person is not feasible</li>
+          </ul>
+        </div>
+        <div class="service-visual">
+          <div class="speak-visual" aria-hidden="true">
+            <div class="speak-stage"></div>
+            <div class="speak-cards">
+              <div class="speak-card">
+                <div class="speak-conf">Web Summit 2025</div>
+                <div class="speak-meta">Lisbon · 70,000 attendees · Confirmed</div>
+              </div>
+              <div class="speak-card">
+                <div class="speak-conf">SXSW Interactive</div>
+                <div class="speak-meta">Austin · 40,000 attendees · Confirmed</div>
+              </div>
+              <div class="speak-card">
+                <div class="speak-conf">MIT EmTech</div>
+                <div class="speak-meta">Cambridge · 2,500 attendees · In progress</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3: Judging -->
+      <div class="service-row reveal">
+        <div class="service-content">
+          <div class="service-index">03 / Expert Judging</div>
+          <h3 class="service-title">When peers ask for your verdict, it counts.</h3>
+          <p class="service-desc">
+            Serving as a judge — at startup competitions, hackathons, research grants, or industry awards — demonstrates that your field recognizes your authority. We place you in relevant panels and provide the documentation that transforms participation into evidence.
+          </p>
+          <ul class="service-features">
+            <li>Matched to panels in your exact area of expertise</li>
+            <li>Official judge invitation and participation letter</li>
+            <li>Criteria brief so your evaluation is substantive and documented</li>
+            <li>Event prestige report included for the attorney's exhibit</li>
+            <li>Remote judging options across all time zones</li>
+          </ul>
+        </div>
+        <div class="service-visual">
+          <div class="judge-visual" aria-hidden="true">
+            <div class="judge-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true">
+                <path d="M12 2L9.2 8.6 2 9.3l5.5 4.8L5.8 21 12 17.3l6.2 3.7-1.7-6.9L22 9.3l-7.2-.7L12 2z"/>
+              </svg>
+            </div>
+            <div class="judge-list">
+              <div class="judge-item"><strong>Y Combinator Demo Day</strong> — Judge panel, SF</div>
+              <div class="judge-item"><strong>MIT Hacking Medicine</strong> — Expert evaluator</div>
+              <div class="judge-item"><strong>Webby Awards 2025</strong> — Industry jury</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROCESS ────────────────────────────────────────────────── -->
+    <section id="process" aria-labelledby="process-heading">
+      <div class="process-header">
+        <div class="reveal-left">
+          <div class="section-label">How it works</div>
+          <h2 class="section-heading" id="process-heading">
+            From profile audit<br>to <em>approved petition.</em>
+          </h2>
+        </div>
+        <div class="reveal-right">
+          <p class="process-note">
+            Most clients see their first placement go live within three weeks of onboarding. The full evidence package — typically six to twelve placements — is assembled within three to five months, depending on your target visa category and timeline.
+          </p>
+        </div>
+      </div>
+
+      <div class="process-grid reveal">
+        <div class="process-step">
+          <div class="process-step-num">Step 01</div>
+          <div class="process-step-title">Profile audit &amp; strategy call</div>
+          <p class="process-step-desc">We review your background, your attorney's evidence checklist, and your timeline. We identify exactly which criteria need evidence and build a placement roadmap.</p>
+          <div class="process-step-arrow" aria-hidden="true"></div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">Step 02</div>
+          <div class="process-step-title">Crafting your narrative</div>
+          <p class="process-step-desc">Our editorial team develops your expert positioning — the story journalists will cover, the speaking angles that conference curators accept, the judging profile that gets you shortlisted.</p>
+          <div class="process-step-arrow" aria-hidden="true"></div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">Step 03</div>
+          <div class="process-step-title">Pitching &amp; placement</div>
+          <p class="process-step-desc">We run active outreach to our media contacts, conference committees, and judging panel coordinators. You review everything before it goes public. We manage revisions and logistics end-to-end.</p>
+          <div class="process-step-arrow" aria-hidden="true"></div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">Step 04</div>
+          <div class="process-step-title">Evidence delivery</div>
+          <p class="process-step-desc">Every placement is packaged into a formatted evidence folder — URLs, PDFs, invitation letters, circulation data, event statistics — ready to hand directly to your immigration attorney.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PACKAGES ──────────────────────────────────────────────── -->
+    <section id="packages" aria-labelledby="packages-heading">
+      <div class="packages-header reveal">
+        <div class="section-label">Packages</div>
+        <h2 class="section-heading" id="packages-heading">Built for where you are in the process.</h2>
+        <p class="packages-note">All packages include attorney-ready evidence formatting. Custom engagements available for urgent timelines.</p>
+      </div>
+
+      <div class="packages-grid">
+
+        <div class="pkg-card reveal">
+          <div class="pkg-tier">Tier 01</div>
+          <div class="pkg-name">Foundation</div>
+          <div class="pkg-tagline">For professionals beginning to build their public profile from scratch.</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li><span class="check">&#10003;</span> 3 media placements (Tier-2/3 outlets)</li>
+            <li><span class="check">&#10003;</span> 1 speaking invitation secured</li>
+            <li><span class="check">&#10003;</span> 1 expert judging placement</li>
+            <li><span class="check">&#10003;</span> Expert bio &amp; positioning document</li>
+            <li><span class="check">&#10003;</span> Evidence folder + attorney summary</li>
+            <li class="muted"><span class="check">—</span> Tier-1 outlet access</li>
+            <li class="muted"><span class="check">—</span> Priority placement queue</li>
+          </ul>
+          <a href="#cta" class="pkg-cta">Schedule a consultation</a>
+        </div>
+
+        <div class="pkg-card featured reveal delay-1">
+          <div class="pkg-featured-badge">Most chosen</div>
+          <div class="pkg-tier">Tier 02</div>
+          <div class="pkg-name">Distinction</div>
+          <div class="pkg-tagline">For professionals with 3–6 months before their petition filing date.</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li><span class="check">&#10003;</span> 6 media placements (Tier-1 &amp; Tier-2)</li>
+            <li><span class="check">&#10003;</span> 2 speaking invitations secured</li>
+            <li><span class="check">&#10003;</span> 2 expert judging placements</li>
+            <li><span class="check">&#10003;</span> Forbes or Bloomberg target included</li>
+            <li><span class="check">&#10003;</span> Attorney coordination calls included</li>
+            <li><span class="check">&#10003;</span> Priority placement queue</li>
+            <li><span class="check">&#10003;</span> Evidence folder + full exhibit list</li>
+          </ul>
+          <a href="#cta" class="pkg-cta">Schedule a consultation</a>
+        </div>
+
+        <div class="pkg-card reveal delay-2">
+          <div class="pkg-tier">Tier 03</div>
+          <div class="pkg-name">Pinnacle</div>
+          <div class="pkg-tagline">Full-service engagement for EB-1A or high-stakes O-1 cases requiring maximum evidence weight.</div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li><span class="check">&#10003;</span> 12 media placements — Tier-1 priority</li>
+            <li><span class="check">&#10003;</span> 4 speaking invitations (incl. keynote pursuit)</li>
+            <li><span class="check">&#10003;</span> 4 expert judging placements</li>
+            <li><span class="check">&#10003;</span> Dedicated account strategist</li>
+            <li><span class="check">&#10003;</span> Monthly attorney briefing calls</li>
+            <li><span class="check">&#10003;</span> RFE response support (additional evidence)</li>
+            <li><span class="check">&#10003;</span> 12-month evidence maintenance retainer</li>
+          </ul>
+          <a href="#cta" class="pkg-cta">Schedule a consultation</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ──────────────────────────────────────────── -->
+    <section id="testimonials" aria-labelledby="testi-heading">
+      <div class="testimonials-header">
+        <div class="reveal-left">
+          <div class="section-label">Client outcomes</div>
+          <h2 class="section-heading" id="testi-heading">
+            From profile to<br><em>permanent resident.</em>
+          </h2>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <article class="testi-card reveal">
+          <div class="testi-quote">
+            "My attorney had submitted two petitions before working with Luminary. Both were denied. After six months with their team — Forbes, a Web Summit keynote, two judging credits — my EB-1A was approved in four weeks."
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">A</div>
+            <div>
+              <div class="testi-name">Andrei M.</div>
+              <div class="testi-role">Senior ML Engineer · Romania</div>
+            </div>
+            <div class="testi-visa">EB-1A</div>
+          </div>
+        </article>
+
+        <article class="testi-card reveal delay-1">
+          <div class="testi-quote">
+            "I didn't realize 'judging the work of others' was a distinct criterion until Luminary's audit. Three hackathon panels and a grant review later, my attorney said the petition was one of the strongest packages she'd ever submitted."
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">P</div>
+            <div>
+              <div class="testi-name">Priya V.</div>
+              <div class="testi-role">Biotech Researcher · India</div>
+            </div>
+            <div class="testi-visa">O-1A</div>
+          </div>
+        </article>
+
+        <article class="testi-card reveal delay-2">
+          <div class="testi-quote">
+            "The media placements alone weren't enough — I'd tried a different agency. What made Luminary different was how they coordinated everything with my lawyer and structured the evidence to map directly to CFR criteria."
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">D</div>
+            <div>
+              <div class="testi-name">Diego F.</div>
+              <div class="testi-role">Creative Director · Brazil</div>
+            </div>
+            <div class="testi-visa">O-1B</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <section id="faq" aria-labelledby="faq-heading">
+      <div class="faq-left reveal-left">
+        <div class="section-label">Common questions</div>
+        <h2 class="section-heading" id="faq-heading">
+          Everything you need<br>to know before<br><em>we begin.</em>
+        </h2>
+        <p class="faq-left-desc">
+          Can't find what you're looking for? Book a free 30-minute profile audit and our strategists will answer your specific questions.
+        </p>
+      </div>
+
+      <div class="faq-list reveal-right" role="list">
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Do you guarantee visa approval?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>No. Visa decisions are made by USCIS and we are not a law firm. What we guarantee is the quality, authenticity, and attorney-readiness of the evidence we build. We work closely with your immigration attorney to ensure every placement satisfies the specific evidentiary criteria your petition requires.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Are the media placements real editorial coverage?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>Yes, always. Every article we secure is genuine editorial content published in real outlets with real editorial standards. We do not use sponsored content, paid advertorials, or content farms — USCIS is familiar with these and they carry no evidentiary weight. Our relationships are with working journalists and editors who publish because your story is genuinely newsworthy.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">How long does the process take?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>Most clients see their first placement within three weeks of onboarding. A full evidence package — typically needed before your attorney files — takes three to five months for the Foundation tier and four to six months for Distinction or Pinnacle. If you have a tighter timeline, discuss it during your profile audit and we'll advise on what's achievable.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Do I need to already have an immigration attorney?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>Not to start with us, but you will need one before filing. We can refer you to attorneys from our network of 120+ firms who regularly work with Luminary clients — they're familiar with our evidence format and often expedite their review as a result. Many clients begin building their profile before retaining an attorney.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Which visa categories do you support?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>Our primary focus is EB-1A (extraordinary ability), EB-1B (outstanding researcher or professor), O-1A (extraordinary ability in sciences, education, business, or athletics), and O-1B (extraordinary achievement in arts, motion picture, or television). Many of the same placements also strengthen EB-2 NIW cases. If you're unsure which category applies to you, our profile audit will clarify this.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text">Can you help if my petition was already denied?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v8M2 6h8"/></svg>
+            </span>
+          </button>
+          <div class="faq-a" role="region">
+            <div class="faq-a-inner">
+              <p>Yes. Denial or an RFE (Request for Evidence) is often a signal that the evidentiary record is incomplete — not that the applicant is unqualified. We frequently work with clients rebuilding their profile after a denial. Share the denial notice or RFE during your audit call and we'll identify exactly which placements will address the specific weaknesses USCIS cited.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── CTA ───────────────────────────────────────────────────── -->
+    <div id="cta" role="region" aria-labelledby="cta-heading">
+      <div class="reveal-left">
+        <h2 class="cta-heading" id="cta-heading">
+          Your profile audit<br>is free.<br><em>Your petition window</em><br>is not.
+        </h2>
+        <p class="cta-sub">
+          Book a 30-minute call with a Luminary strategist. We'll review your background, identify the evidence gaps in your current profile, and tell you exactly what we'd build — before you commit to anything.
+        </p>
+      </div>
+
+      <div class="cta-right reveal-right">
+        <form class="cta-form" action="#" method="POST" aria-label="Book a consultation">
+          <input class="cta-input" type="text" name="name" placeholder="Full name" required autocomplete="name" />
+          <input class="cta-input" type="email" name="email" placeholder="Work email" required autocomplete="email" />
+          <select class="cta-select" name="visa" required>
+            <option value="" disabled selected>Target visa category</option>
+            <option value="eb1a">EB-1A — Extraordinary ability</option>
+            <option value="eb1b">EB-1B — Outstanding researcher / professor</option>
+            <option value="o1a">O-1A — Sciences, business, athletics</option>
+            <option value="o1b">O-1B — Arts, film, television</option>
+            <option value="niw">EB-2 NIW — National interest waiver</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+          <select class="cta-select" name="timeline" required>
+            <option value="" disabled selected>Your filing timeline</option>
+            <option value="urgent">Under 3 months</option>
+            <option value="medium">3–6 months</option>
+            <option value="planning">6–12 months</option>
+            <option value="early">Just planning ahead</option>
+          </select>
+          <button type="submit" class="cta-submit">Book my free profile audit</button>
+        </form>
+        <div class="cta-trust">No commitment required. Response within one business day.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-brand">
+      <div class="nav-logo">Luminary<span>.</span></div>
+      <p>PR strategy for EB-1 and O-1 visa applicants. Building the evidence record that immigration attorneys trust.</p>
+    </div>
+
+    <div>
+      <div class="footer-col-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Media publications</a></li>
+        <li><a href="#services">Conference speaking</a></li>
+        <li><a href="#services">Expert judging</a></li>
+        <li><a href="#packages">Packages</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Attorney partners</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-heading">Visa resources</div>
+      <ul class="footer-links">
+        <li><a href="#">EB-1A guide</a></li>
+        <li><a href="#">O-1 criteria explained</a></li>
+        <li><a href="#">Evidence checklist</a></li>
+        <li><a href="#">RFE response guide</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Luminary PR. All rights reserved. Not a law firm.</p>
+    <ul class="footer-legal">
+      <li><a href="#">Privacy policy</a></li>
+      <li><a href="#">Terms of service</a></li>
+      <li><a href="#">Legal disclaimer</a></li>
+    </ul>
+  </div>
+
+  <!-- ─── SCRIPTS ───────────────────────────────────────────────── -->
+  <script>
+    // ── Nav scroll state ──────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Mobile nav toggle ─────────────────────────────────────────
+    const burger = document.querySelector('.nav-burger');
+    let mobileOpen = false;
+    burger.addEventListener('click', () => {
+      mobileOpen = !mobileOpen;
+      burger.classList.toggle('open', mobileOpen);
+      burger.setAttribute('aria-expanded', mobileOpen);
+    });
+
+    // ── Intersection observer: reveal ─────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .hero-label, .hero-heading, .hero-sub, .hero-actions, .hero-right, .hero-scroll');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── Counter animation ─────────────────────────────────────────
+    const counters = document.querySelectorAll('.counter');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        const duration = 1600;
+        const start = performance.now();
+        const animate = (now) => {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(eased * target).toLocaleString();
+          if (t < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => countObs.observe(c));
+
+    // ── Bar chart animation ───────────────────────────────────────
+    const bars = document.querySelectorAll('.bento-bar-fill');
+    const barObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.style.width = e.target.dataset.width + '%';
+        barObs.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    bars.forEach(b => barObs.observe(b));
+
+    // ── FAQ accordion ─────────────────────────────────────────────
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // close all
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── Spotlight border on bento cards (mouse position) ─────────
+    document.querySelectorAll('.bento-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.background = `radial-gradient(circle at ${x}% ${y}%, #1e1b18, var(--bg-2) 60%)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.background = '';
+      });
+    });
+  </script>
+</body>
+</html>
