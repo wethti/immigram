@@ -1192,18 +1192,19 @@
       border-top: 1px solid var(--border);
     }
     .testi-avatar {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: var(--bg-3);
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 0.85rem;
-      color: var(--gold);
+      overflow: hidden;
       flex-shrink: 0;
+    }
+    .testi-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .testi-name {
       font-size: 0.875rem;
@@ -1573,6 +1574,101 @@
       .stat-card-inline { grid-template-columns: 1fr; }
       .stat-card-inline .stat-part + .stat-part { border-left: none; border-top: 1px solid var(--border); }
       footer { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .hero-faces { display: none; }
+    }
+
+    /* ── Hero social proof faces ───────────────────────────── */
+    .hero-faces {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      margin-top: 2.25rem;
+    }
+    .hero-faces-stack {
+      display: flex;
+    }
+    .hero-faces-stack img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      object-fit: cover;
+      margin-left: -10px;
+      display: block;
+    }
+    .hero-faces-stack img:first-child { margin-left: 0; }
+    .hero-faces-text {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      line-height: 1.4;
+    }
+    .hero-faces-text strong {
+      color: var(--text-2);
+      font-weight: 500;
+    }
+
+    /* ── Team section ──────────────────────────────────────── */
+    #team {
+      border-bottom: 1px solid var(--border);
+    }
+    .team-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .team-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .team-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-4px);
+    }
+    .team-card-photo {
+      width: 100%;
+      aspect-ratio: 3/3.2;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s;
+    }
+    .team-card:hover .team-card-photo { filter: grayscale(0%); }
+    .team-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .team-card-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+    .team-card-title {
+      font-size: 0.78rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    .team-card-bio {
+      font-size: 0.85rem;
+      color: var(--text-3);
+      line-height: 1.55;
     }
   </style>
 </head>
@@ -1621,6 +1717,19 @@
             See how it works
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5"/></svg>
           </a>
+        </div>
+
+        <div class="hero-faces reveal">
+          <div class="hero-faces-stack">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=68&h=68&fit=crop&crop=face" alt="Client" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=68&h=68&fit=crop&crop=face" alt="Client" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=68&h=68&fit=crop&crop=face" alt="Client" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=68&h=68&fit=crop&crop=face" alt="Client" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=68&h=68&fit=crop&crop=face" alt="Client" loading="lazy">
+          </div>
+          <div class="hero-faces-text">
+            <strong>840+ professionals</strong> have built<br>their EB-1 &amp; O-1 evidence with us
+          </div>
         </div>
       </div>
 
@@ -2058,6 +2167,67 @@
     </section>
 
     <!-- ─── TESTIMONIALS ──────────────────────────────────────────── -->
+    <!-- ─── TEAM ──────────────────────────────────────────────────── -->
+    <section id="team" aria-labelledby="team-heading">
+      <div class="team-intro">
+        <div class="reveal-left">
+          <div class="section-label">Who builds your profile</div>
+          <h2 class="section-heading" id="team-heading">
+            Journalists, editors,<br>and <em>conference insiders.</em>
+          </h2>
+        </div>
+        <p class="reveal" style="color:var(--text-2);line-height:1.65;font-size:0.95rem;max-width:38ch;">
+          Our team comes from the outlets and stages your petition needs to reference. We don't outsource to generalists — every placement is handled by someone who has sat on the other side of the pitch.
+        </p>
+      </div>
+
+      <div class="team-grid">
+
+        <article class="team-card reveal">
+          <img
+            class="team-card-photo"
+            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=640&fit=crop&crop=top"
+            alt="Marcus Reid — Head of Strategy"
+            loading="lazy"
+          >
+          <div class="team-card-body">
+            <div class="team-card-name">Marcus Reid</div>
+            <div class="team-card-title">Head of Strategy</div>
+            <p class="team-card-bio">Former Forbes contributing editor with 11 years placing expert profiles across tech, science, and finance. Led EB-1 evidence packages for 300+ petitions.</p>
+          </div>
+        </article>
+
+        <article class="team-card reveal delay-1">
+          <img
+            class="team-card-photo"
+            src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=640&fit=crop&crop=top"
+            alt="Sophia Crane — Editorial Director"
+            loading="lazy"
+          >
+          <div class="team-card-body">
+            <div class="team-card-name">Sophia Crane</div>
+            <div class="team-card-title">Editorial Director</div>
+            <p class="team-card-bio">Built the speaker programs at SaaStr and Web Summit Europe. Knows exactly how curators shortlist and what makes a bio land — or get archived.</p>
+          </div>
+        </article>
+
+        <article class="team-card reveal delay-2">
+          <img
+            class="team-card-photo"
+            src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=640&fit=crop&crop=top"
+            alt="Daniel Osei — Partnerships Lead"
+            loading="lazy"
+          >
+          <div class="team-card-body">
+            <div class="team-card-name">Daniel Osei</div>
+            <div class="team-card-title">Partnerships Lead</div>
+            <p class="team-card-bio">Manages our network of 340+ outlet editors and 120+ immigration attorneys. Coordinates evidence packaging so your lawyer can file without gaps.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <section id="testimonials" aria-labelledby="testi-heading">
       <div class="testimonials-header">
         <div class="reveal-left">
@@ -2075,7 +2245,9 @@
             "My attorney had submitted two petitions before working with Talentrelo. Both were denied. After six months with their team — Forbes, a Web Summit keynote, two judging credits — my EB-1A was approved in four weeks."
           </div>
           <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">A</div>
+            <div class="testi-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=88&h=88&fit=crop&crop=face" alt="Andrei M." loading="lazy">
+            </div>
             <div>
               <div class="testi-name">Andrei M.</div>
               <div class="testi-role">Senior ML Engineer · Romania</div>
@@ -2089,7 +2261,9 @@
             "I didn't realize 'judging the work of others' was a distinct criterion until Talentrelo's audit. Three hackathon panels and a grant review later, my attorney said the petition was one of the strongest packages she'd ever submitted."
           </div>
           <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">P</div>
+            <div class="testi-avatar">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=88&h=88&fit=crop&crop=face" alt="Priya V." loading="lazy">
+            </div>
             <div>
               <div class="testi-name">Priya V.</div>
               <div class="testi-role">Biotech Researcher · India</div>
@@ -2103,7 +2277,9 @@
             "The media placements alone weren't enough — I'd tried a different agency. What made Talentrelo different was how they coordinated everything with my lawyer and structured the evidence to map directly to CFR criteria."
           </div>
           <div class="testi-author">
-            <div class="testi-avatar" aria-hidden="true">D</div>
+            <div class="testi-avatar">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=88&h=88&fit=crop&crop=face" alt="Diego F." loading="lazy">
+            </div>
             <div>
               <div class="testi-name">Diego F.</div>
               <div class="testi-role">Creative Director · Brazil</div>
