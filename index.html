@@ -135,7 +135,7 @@
     #hero {
       min-height: 100dvh;
       display: grid;
-      grid-template-columns: 1fr 420px;
+      grid-template-columns: 1fr 460px;
       grid-template-rows: 1fr auto;
       gap: 0;
       padding: 8rem 3rem 4rem;
@@ -249,67 +249,102 @@
     .btn-ghost:hover { color: var(--text); }
     .btn-ghost:hover svg { transform: translateX(4px); }
 
-    /* Hero right — stat card stack */
+    /* Hero right — portrait photo */
     .hero-right {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.75rem;
+      align-self: stretch;
       opacity: 0;
       transform: translateX(24px);
       transition: opacity 0.9s var(--ease-out) 0.25s, transform 0.9s var(--ease-out) 0.25s;
     }
     .hero-right.visible { opacity: 1; transform: translateX(0); }
 
-    .stat-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem 2rem;
+    .hero-portrait {
       position: relative;
+      border-radius: var(--radius-lg);
       overflow: hidden;
+      flex: 1;
+      min-height: 420px;
     }
-    .stat-card::after {
-      content: '';
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .hero-portrait-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-      opacity: 0.5;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(12,11,9,0.5) 0%, transparent 45%),
+        linear-gradient(to top, rgba(12,11,9,0.65) 0%, transparent 55%);
+      pointer-events: none;
     }
-    .stat-card-label {
+    .hero-portrait-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: rgba(12,11,9,0.72);
+      backdrop-filter: blur(18px) saturate(1.5);
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      border: 1px solid rgba(200,169,110,0.22);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+    }
+    .hero-portrait-badge-value {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-portrait-badge-value span { color: var(--gold); }
+    .hero-portrait-badge-label {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      font-size: 0.68rem;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--text-3);
-      margin-bottom: 0.5rem;
-    }
-    .stat-card-value {
-      font-family: var(--serif);
-      font-size: 2.8rem;
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      color: var(--text);
-    }
-    .stat-card-value span { color: var(--gold); }
-    .stat-card-desc {
-      font-size: 0.8rem;
-      color: var(--text-3);
-      margin-top: 0.4rem;
-      line-height: 1.5;
     }
 
-    .stat-card-inline {
+    .hero-portrait-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex-shrink: 0;
     }
-    .stat-card-inline .stat-part {
-      padding: 1.5rem 2rem;
+    .hero-portrait-stat {
+      padding: 1rem 1.1rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
     }
-    .stat-card-inline .stat-part + .stat-part {
-      border-left: 1px solid var(--border);
+    .hero-portrait-stat:last-child { border-right: none; }
+    .hero-portrait-stat-val {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .hero-portrait-stat-val .accent { color: var(--gold); }
+    .hero-portrait-stat small {
+      font-size: 0.67rem;
+      color: var(--text-3);
+      font-family: var(--mono);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      line-height: 1.35;
     }
 
     .hero-scroll {
@@ -1529,9 +1564,8 @@
       #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
       .hero-bg-line { display: none; }
       .hero-left { padding-right: 0; }
-      .hero-right { flex-direction: row; flex-wrap: wrap; }
-      .hero-right .stat-card { flex: 1; min-width: 200px; }
-      .hero-right .stat-card-inline { flex: 1 0 100%; }
+      .hero-portrait { min-height: 300px; }
+      .hero-portrait-stats { grid-template-columns: repeat(3, 1fr); }
 
       #trust { padding: 1.5rem 2rem; }
 
@@ -1570,9 +1604,7 @@
       .bento-grid { grid-template-columns: 1fr; }
       .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-7, .bc-8 { grid-column: span 1; }
       .process-grid { grid-template-columns: 1fr; }
-      .hero-right { flex-direction: column; }
-      .stat-card-inline { grid-template-columns: 1fr; }
-      .stat-card-inline .stat-part + .stat-part { border-left: none; border-top: 1px solid var(--border); }
+      .hero-right { display: none; }
       footer { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
       .hero-faces { display: none; }
@@ -1734,27 +1766,39 @@
       </div>
 
       <div class="hero-right reveal-right">
-        <div class="stat-card">
-          <div class="stat-card-label">Placements delivered</div>
-          <div class="stat-card-value"><span class="counter" data-target="2400">0</span><span>+</span></div>
-          <div class="stat-card-desc">Media features, speaking slots &amp; judging credits since 2019</div>
+        <div class="hero-portrait">
+          <img
+            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=900&h=1100&fit=crop&crop=top"
+            alt="Professional building their extraordinary visa profile"
+            loading="eager"
+            fetchpriority="high"
+          >
+          <div class="hero-portrait-overlay" aria-hidden="true"></div>
+          <div class="hero-portrait-badge">
+            <div class="hero-portrait-badge-value">
+              <span class="counter" data-target="2400">0</span><span style="color:var(--gold)">+</span>
+            </div>
+            <div class="hero-portrait-badge-label">Placements delivered</div>
+          </div>
         </div>
 
-        <div class="stat-card stat-card-inline">
-          <div class="stat-part">
-            <div class="stat-card-label">Avg. time to first placement</div>
-            <div class="stat-card-value" style="font-size:2rem;"><span>3</span><span style="font-size:1.1rem;color:var(--text-2);margin-left:4px;">weeks</span></div>
+        <div class="hero-portrait-stats">
+          <div class="hero-portrait-stat">
+            <div class="hero-portrait-stat-val">
+              <span class="counter" data-target="98">0</span><span class="accent">%</span>
+            </div>
+            <small>Attorney-ready packages</small>
           </div>
-          <div class="stat-part">
-            <div class="stat-card-label">Attorney-ready packages</div>
-            <div class="stat-card-value" style="font-size:2rem;"><span class="counter" data-target="98">0</span><span style="font-size:1.1rem;color:var(--gold);">%</span></div>
+          <div class="hero-portrait-stat">
+            <div class="hero-portrait-stat-val">3 <span style="font-size:0.75em;color:var(--text-2)">wks</span></div>
+            <small>Avg. first placement</small>
           </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-card-label">Outlets we place in</div>
-          <div class="stat-card-value"><span class="counter" data-target="340">0</span><span>+</span></div>
-          <div class="stat-card-desc">From Forbes &amp; Wired to niche industry journals that carry weight with USCIS</div>
+          <div class="hero-portrait-stat">
+            <div class="hero-portrait-stat-val">
+              <span class="counter" data-target="340">0</span><span class="accent">+</span>
+            </div>
+            <small>Outlet partners</small>
+          </div>
         </div>
       </div>
 
