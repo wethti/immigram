@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Record — Talentrelo Blog</title>
+  <meta name="description" content="Strategy, evidence-building, and field guides for EB-1 and O-1 visa applicants." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0C0B09;
+      --bg-2:      #141210;
+      --bg-3:      #1A1815;
+      --border:    #252220;
+      --border-2:  #302C28;
+      --gold:      #C8A96E;
+      --gold-dim:  #8A7249;
+      --text:      #F0EBE1;
+      --text-2:    #A89F91;
+      --text-3:    #6B6259;
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Plus Jakarta Sans', system-ui, sans-serif;
+      --mono:      'DM Mono', monospace;
+      --radius:    12px;
+      --radius-lg: 20px;
+      --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --content-max: 740px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(12,11,9,0.85);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-2);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      transition: opacity 0.2s, transform 0.25s var(--ease-spring);
+    }
+    .nav-cta:hover { opacity: 0.88; transform: scale(1.04); }
+
+    /* ── Blog masthead ───────────────────────────────────── */
+    #masthead {
+      padding: 8rem 3rem 3.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+    }
+    .masthead-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .masthead-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .masthead-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.06;
+      color: var(--text);
+    }
+    .masthead-title em { font-style: italic; color: var(--gold); }
+    .masthead-desc {
+      font-size: 0.9rem;
+      color: var(--text-3);
+      max-width: 32ch;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    /* ── Category filter ─────────────────────────────────── */
+    #filters {
+      padding: 1.5rem 3rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 65px;
+      background: rgba(12,11,9,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 50;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--border-2); color: var(--text-2); }
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+
+    /* ── Article grid ────────────────────────────────────── */
+    #listing {
+      padding: 3rem;
+    }
+
+    .featured-article {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .featured-article:hover { border-color: var(--border-2); }
+    .featured-article:hover .featured-img { transform: scale(1.03); }
+    .featured-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .featured-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .featured-body {
+      padding: 2.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+      background: var(--bg-2);
+    }
+    .article-cat {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .featured-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .article-excerpt {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-3);
+      font-family: var(--mono);
+    }
+    .article-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gold);
+      transition: gap 0.25s var(--ease-spring);
+    }
+    .read-more:hover { gap: 0.7rem; }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .article-card {
+      background: var(--bg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .article-card:hover { background: var(--bg-2); }
+    .article-card-heading {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text);
+      flex: 1;
+    }
+    .article-card-excerpt {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Single article ──────────────────────────────────── */
+    #article-view {
+      display: none;
+      max-width: 100%;
+    }
+    #article-view.active { display: block; }
+    #listing.hidden { display: none; }
+
+    .article-hero {
+      padding: 7rem 3rem 0;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .article-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-bottom: 2rem;
+      font-family: var(--mono);
+    }
+    .article-breadcrumb a { color: var(--text-3); transition: color 0.2s; }
+    .article-breadcrumb a:hover { color: var(--gold); }
+    .article-breadcrumb-sep { opacity: 0.4; }
+    .article-main-cat {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .article-main-cat::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .article-main-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3.75rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .article-main-title em { font-style: italic; color: var(--gold); }
+    .article-main-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--text-3);
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .article-author-block {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .article-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .article-author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-author-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+    .article-author-role {
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+    .article-meta-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+    }
+    .article-date, .article-read-time {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+
+    .article-cover {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 16/7;
+    }
+    .article-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .article-body {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+    }
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+    }
+    .article-body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-2);
+      margin-bottom: 1.25rem;
+    }
+    .article-body p strong { color: var(--text); font-weight: 500; }
+    .article-body ul, .article-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .article-body li {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-2);
+      margin-bottom: 0.4rem;
+    }
+    .article-body blockquote {
+      border-left: 2px solid var(--gold);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+    }
+    .article-body blockquote p {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .article-related {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .article-related-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.25s var(--ease-spring);
+    }
+    .related-card:hover { border-color: var(--border-2); transform: translateY(-3px); }
+    .related-card-cat {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .related-card-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    footer p { font-size: 0.8rem; color: var(--text-3); }
+    footer a { color: var(--text-3); transition: color 0.2s; }
+    footer a:hover { color: var(--gold); }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #masthead { padding: 6rem 1.5rem 2.5rem; grid-template-columns: 1fr; }
+      .masthead-desc { text-align: left; }
+      #filters { padding: 1rem 1.5rem; top: 60px; }
+      #listing { padding: 1.5rem; }
+      .featured-article { grid-template-columns: 1fr; }
+      .featured-img-wrap { aspect-ratio: 16/9; }
+      .featured-body { padding: 1.75rem; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .article-hero { padding: 6rem 1.5rem 0; }
+      .article-body { padding: 0 1.5rem 4rem; }
+      .article-cover { border-radius: 0; margin-bottom: 2.5rem; }
+      .related-grid { grid-template-columns: 1fr; }
+      .article-related { padding: 2rem 1.5rem; }
+      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Talentrelo<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#process">How it works</a></li>
+      <li><a href="/#packages">Packages</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+    </ul>
+    <a href="/#cta" class="nav-cta">Book a consultation</a>
+  </nav>
+
+  <!-- LISTING VIEW -->
+  <div id="listing">
+    <header id="masthead">
+      <div>
+        <div class="masthead-eyebrow">The Record</div>
+        <h1 class="masthead-title">Strategy and evidence<br>for <em>extraordinary</em> cases.</h1>
+      </div>
+      <p class="masthead-desc">Guides, breakdowns, and field notes for professionals building their EB-1 and O-1 visa evidence.</p>
+    </header>
+
+    <div id="filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="Strategy">Strategy</button>
+      <button class="filter-btn" data-cat="Evidence">Evidence</button>
+      <button class="filter-btn" data-cat="Media">Media</button>
+      <button class="filter-btn" data-cat="Speaking">Speaking</button>
+      <button class="filter-btn" data-cat="Field Guides">Field Guides</button>
+      <button class="filter-btn" data-cat="Process">Process</button>
+    </div>
+
+    <div id="featured-slot"></div>
+    <div id="grid-slot" class="articles-grid"></div>
+  </div>
+
+  <!-- ARTICLE VIEW -->
+  <div id="article-view"></div>
+
+  <footer>
+    <p>&copy; 2025 Talentrelo PR. Not a law firm.</p>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/#packages">Packages</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#cta">Contact</a>
+    </nav>
+  </footer>
+
+<script>
+// ─── Article data ──────────────────────────────────────────────────────────
+
+const AUTHORS = {
+  marcus: {
+    name: 'Marcus Reid',
+    title: 'Head of Strategy',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=72&h=72&fit=crop&crop=face'
+  },
+  sophia: {
+    name: 'Sophia Crane',
+    title: 'Editorial Director',
+    avatar: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=72&h=72&fit=crop&crop=face'
+  },
+  daniel: {
+    name: 'Daniel Osei',
+    title: 'Partnerships Lead',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=72&h=72&fit=crop&crop=face'
+  }
+};
+
+const ARTICLES = [
+  {
+    slug: 'what-uscis-looks-for-eb1a',
+    title: 'What USCIS Actually Looks for in an EB-1A Petition',
+    category: 'Strategy',
+    date: '2026-03-14',
+    readTime: 9,
+    author: 'marcus',
+    excerpt: 'The extraordinary ability standard is misunderstood by most applicants. Here is what the adjudicators are actually measuring when they review your petition.',
+    cover: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=525&fit=crop',
+    body: `
+      <p>Most professionals who qualify for an EB-1A petition don't realize they qualify. The phrase "extraordinary ability" conjures images of Nobel laureates and Olympic athletes — people whose names appear in textbooks. That is a fundamental misreading of the standard.</p>
+      <p>USCIS defines extraordinary ability as a "level of expertise indicating that the person is one of that small percentage who have risen to the very top of the field." The operative phrase is <strong>"a small percentage"</strong> — not the top one person in the world. An ML engineer whose work has been cited 400 times, who has published in NeurIPS and ICML, and who has judged two major hackathons almost certainly meets this bar. So does a product designer whose work has been featured in Wired, who has spoken at Config, and who holds a senior role at a Series C company.</p>
+
+      <h2>The Ten Criteria — and Why You Only Need Three</h2>
+      <p>The regulations list ten separate criteria for demonstrating extraordinary ability. A petition must satisfy at least three of them. Most attorneys will tell you to chase the criteria where your existing record is strongest, then build evidence to shore up the others. This is correct, but incomplete. What matters is not just whether you technically satisfy a criterion — it's whether the evidence you submit is <em>compelling</em>.</p>
+      <p>The most commonly satisfied criteria are: (1) receipt of prizes or awards for excellence, (2) membership in associations requiring outstanding achievement, (3) published material in professional publications or major media, (4) judging the work of others, (5) original scientific or scholarly contributions of major significance, (6) authorship of scholarly articles, (7) display of work at exhibitions, (8) performance in a critical or essential role at a distinguished organization, (9) commanding a high salary relative to peers, and (10) commercial success in the performing arts.</p>
+
+      <h2>What "Compelling" Looks Like</h2>
+      <p>For the judging criterion, a participation certificate from a mid-tier hackathon is technically sufficient but rarely compelling. A letter from the organizer of a major event — explaining that you were selected from a shortlist of 200 nominated experts, that your feedback influenced prize decisions affecting $500,000 in awards — is compelling. The difference between an approved petition and an RFE is often not the criteria you select but the quality and specificity of the evidence supporting each one.</p>
+      <p>For media coverage, a quote buried in a round-up article is technically a published mention. A 600-word profile in Forbes, opened with your name in the headline, that describes your work as "pioneering" and reaches an audience of 2.3 million — that is the kind of placement that makes an adjudicator close the file and approve.</p>
+
+      <h2>The Final Merits Determination</h2>
+      <p>Even after satisfying three criteria, USCIS conducts a "final merits determination": a holistic assessment of whether the totality of evidence demonstrates that you are among the small percentage at the top of your field. This is where many otherwise strong petitions fail. The criteria are a threshold, not a checklist. An attorney filing a petition where the only evidence of media coverage is a mention in a local tech blog, and the only judging credit is a small internal company hackathon, may technically clear three criteria while failing the final merits test.</p>
+      <p><strong>The practical takeaway:</strong> build evidence that would persuade a skeptical reader who knows nothing about your field. If your Forbes profile clearly explains why your work is significant, your petition benefits whether the adjudicator has a STEM background or not.</p>
+    `
+  },
+  {
+    slug: 'eb1a-vs-eb1b',
+    title: 'EB-1A vs EB-1B: Which Category Is Actually Right for You',
+    category: 'Strategy',
+    date: '2026-03-07',
+    readTime: 7,
+    author: 'marcus',
+    excerpt: 'Both categories are called EB-1, but the evidence requirements, sponsorship rules, and approval timelines are meaningfully different. Here is how to choose.',
+    cover: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=525&fit=crop&crop=top',
+    body: `
+      <p>EB-1A and EB-1B both sit in the employment-based first preference category, both are generally current for most nationalities, and both avoid the PERM labor certification process. The similarity ends there.</p>
+
+      <h2>EB-1A: Self-Petition, No Employer Required</h2>
+      <p>The EB-1A allows you to file your own I-140 petition without an employer sponsor. This is its defining advantage. If you qualify, you are not dependent on your employer's willingness to sponsor you, their legal budget, or their continued interest in keeping you around through the USCIS adjudication process. You retain full control over your case.</p>
+      <p>The tradeoff is that the evidentiary bar is high. You must demonstrate extraordinary ability in your field through sustained national or international acclaim. Three of the ten regulatory criteria must be satisfied — and the final merits determination must show you are among the top tier of practitioners globally, not just in your local market or company.</p>
+
+      <h2>EB-1B: Requires a Job Offer, but a Narrower Standard</h2>
+      <p>EB-1B covers outstanding professors and researchers. It requires a qualifying job offer from a university, research institution, or certain private employers with substantial research departments. The good news: the "outstanding" standard, while rigorous, is generally considered somewhat easier to meet than the EB-1A's "extraordinary ability" standard.</p>
+      <p>You need at least three years of experience in teaching or research, an offer for a tenured, tenure-track, or comparable permanent research position, and evidence of being recognized internationally as outstanding. Two of six specific criteria must be satisfied, and those criteria map closely to academic metrics: publications, citations, judging, prizes, critical role at a distinguished institution, and significant contributions to the field.</p>
+
+      <h2>How to Choose</h2>
+      <p>If you are an academic with a qualifying employer willing to sponsor you, EB-1B may be the faster, more straightforward path. If you are in the private sector, if you want independence from employer sponsorship, or if your profile is built more on industry recognition than publication record, EB-1A is usually the right answer. Some applicants file both simultaneously to hedge — this is valid and occasionally done, but it requires separate fees and separate evidence packages.</p>
+      <p>One additional consideration: approval rates. EB-1B has historically shown somewhat higher approval rates than EB-1A, partly because the population filing EB-1B tends to have cleaner academic records that map neatly to the criteria. EB-1A approvals require more interpretive judgment from adjudicators, which introduces more variability. Building a genuinely strong EB-1A record — rather than the bare minimum — is the most reliable way to close that gap.</p>
+    `
+  },
+  {
+    slug: 'o1a-vs-niw',
+    title: 'O-1A vs National Interest Waiver: A Side-by-Side Breakdown',
+    category: 'Strategy',
+    date: '2026-02-28',
+    readTime: 8,
+    author: 'marcus',
+    excerpt: 'Both avoid PERM. Both are merit-based. But they serve different profiles — and the wrong choice can cost you 18 months.',
+    cover: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=525&fit=crop',
+    body: `
+      <p>When professionals first learn they may not need PERM labor certification, the National Interest Waiver and O-1A often appear together in the same conversation. They are meaningfully different instruments, and choosing between them depends on your timeline, your profile, and what you're ultimately optimizing for.</p>
+
+      <h2>The Fundamental Structural Difference</h2>
+      <p>The O-1A is a nonimmigrant visa. Approval means work authorization, not a green card. It is typically granted in three-year increments and can be renewed. The NIW, by contrast, is an immigrant petition — an I-140 — that leads directly to a green card, subject to priority date availability for your country of birth.</p>
+      <p>This distinction matters enormously for nationals of India and China, where the EB-2 backlog (where the NIW lives) is measured in decades, not months. An approved NIW for an Indian national may not lead to green card issuance for thirty or more years under current conditions. The O-1A, meanwhile, keeps you working legally in the US for as long as you can maintain the status — and can run concurrently with an EB-1A self-petition, which is current for most nationalities.</p>
+
+      <h2>Evidentiary Standards</h2>
+      <p>The NIW, post-<em>Dhanasar</em> (2016), asks three things: (1) that your work is in a substantial merit and national importance area, (2) that you are well-positioned to advance that work, and (3) that it would be beneficial to the United States to waive the labor certification requirement. The standard is forward-looking and somewhat flexible — it does not require the level of acclaim that EB-1A demands.</p>
+      <p>The O-1A standard is closer to EB-1A: sustained recognition, extraordinary achievement, and evidence across recognized criteria. The difference is that O-1A evidence is evaluated against a nonimmigrant standard and is not subject to the same final merits determination rigor as EB-1A. In practice, many officers evaluate them similarly — but O-1A filings do benefit from slightly more deferential treatment.</p>
+
+      <h2>Which to Pursue</h2>
+      <p>If your priority is a green card and your country of birth does not face significant backlogs: pursue EB-1A. If you are from a backlogged country and need work authorization now, with a green card as a long-term goal: pursue O-1A as your primary status while concurrently filing an EB-1A. The NIW is most valuable for early-career researchers and professionals who cannot yet meet the extraordinary ability standard but have a clear and documented national-interest argument to make.</p>
+    `
+  },
+  {
+    slug: 'when-to-start-building-profile',
+    title: 'How Far in Advance Should You Start Building Your Profile',
+    category: 'Strategy',
+    date: '2026-02-14',
+    readTime: 6,
+    author: 'sophia',
+    excerpt: 'The most common mistake in EB-1 preparation is starting too late. Here is how to think about your timeline.',
+    cover: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&h=525&fit=crop',
+    body: `
+      <p>The professionals who have the smoothest EB-1 petition experiences tend to have one thing in common: they started building their public record 18 to 24 months before their attorney filed. The ones who come to us in a panic — needing evidence assembled in six weeks before a status expiration — face a much harder road.</p>
+
+      <h2>Why the Timeline Matters More Than Most Attorneys Tell You</h2>
+      <p>High-quality media placements take time. A Forbes contributor article requires editorial relationship-building, pitching, a back-and-forth review process, and a publication queue that can stretch four to eight weeks from commission to live. A speaking slot at a credible conference typically requires submitting a proposal three to six months before the event, then being selected, then actually delivering the talk.</p>
+      <p>Judging credits are the most time-sensitive of all. Hackathons, grant reviews, and startup competitions run on fixed calendars. If you miss the application window for the events that would best serve your petition, you may wait a year for the next cycle.</p>
+
+      <h2>The Practical Timeline</h2>
+      <p>Month 1–3: Begin the narrative. Work with a strategist to identify your three strongest criteria and the specific evidence gaps in your current record. This phase is about diagnosis, not execution. Month 3–9: Build the first wave of evidence. First media placements, first judging credit, first conference talk. Aim for quality over volume — a single Forbes feature carries more weight than five smaller placements. Month 9–18: Complete the full evidence package. Stack corroborating evidence across criteria. Build redundancy: if one placement falls through, others cover the gap. Month 15–24: Attorney review and petition assembly. Your attorney will want 60–90 days to prepare the filing. Month 18–24: File.</p>
+
+      <h2>The Exception: Pressure Situations</h2>
+      <p>If you are facing a visa expiration or a layoff that will void your current status, six months of focused work can produce a viable evidence package — but you must accept constraints. You will not get a keynote at a major conference. You may not land Forbes. You can, however, build a credible collection of smaller but legitimate placements, secure two or three judging credits from events with shorter cycles, and construct a package that, while not elite, is defensible. An honest attorney will tell you what is possible on that timeline and what is not.</p>
+    `
+  },
+  {
+    slug: 'how-attorneys-use-pr-evidence',
+    title: 'How Immigration Attorneys Use Your PR Evidence Package',
+    category: 'Strategy',
+    date: '2026-01-31',
+    readTime: 7,
+    author: 'daniel',
+    excerpt: 'Your attorney files the petition, but the evidence you build determines what they have to work with. Understanding how lawyers use PR materials changes what you should prioritize.',
+    cover: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=525&fit=crop',
+    body: `
+      <p>Immigration attorneys are legal craftspeople, not PR strategists. The best ones are exceptional at structuring legal arguments, identifying the right criteria, and translating your evidence into the language USCIS adjudicators use. What they cannot do is manufacture evidence that doesn't exist — and they will tell you, usually privately, that the quality of what their clients bring them varies enormously.</p>
+
+      <h2>The Attorney's Actual Job</h2>
+      <p>When your attorney prepares an I-140 petition, they are assembling a legal brief. Each criterion they assert on your behalf must be backed by exhibits: the actual Forbes article, the letter from the conference organizer confirming your speaking role, the judging panel documentation showing your name. The attorney writes the narrative that ties these exhibits together, but they cannot strengthen evidence that is weak at the source.</p>
+      <p>A Forbes article that describes your work as significant is useful. A Forbes article that names you, quotes a peer calling your work "a breakthrough," and ties your contribution to a specific industry development is much more useful. The difference is not created in the attorney's office — it is created in how the placement was set up in the first place.</p>
+
+      <h2>What Strong Evidence Packages Enable</h2>
+      <p>Attorneys who work with clients who have strong, well-structured evidence packages report significantly faster petition preparation, fewer pre-filing discussions about whether the case is ready, and more confident final merits arguments. Some attorneys in our network have told us that clients who arrive with a Talentrelo package require roughly half the preparation time of clients who self-assembled their evidence, largely because the documentation is organized to map to specific regulatory criteria.</p>
+
+      <h2>The Evidence Format That Helps Attorneys Most</h2>
+      <p>The most useful format for your attorney is not a pile of links. It is: a one-page evidence summary organized by criterion, with each exhibit labeled, dated, and accompanied by a brief explanation of its significance. If your Forbes article mentions three industry peers who can confirm your contributions, note that. If the hackathon you judged has a documented selection process that involved nominations from 200 companies, include that documentation. Attorneys can work with raw material, but organized, criterion-mapped evidence is what allows them to write a truly compelling petition.</p>
+    `
+  },
+  {
+    slug: 'judging-criterion-explained',
+    title: 'The Judging Criterion: Why Hackathon Panels Carry More Weight Than You Think',
+    category: 'Evidence',
+    date: '2026-03-10',
+    readTime: 8,
+    author: 'sophia',
+    excerpt: 'Criterion 4 — judging the work of others — is one of the most accessible and least understood evidence types for EB-1A and O-1A petitions.',
+    cover: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=525&fit=crop',
+    body: `
+      <p>Of the ten EB-1A criteria, judging the work of others is both the most frequently underestimated and, for many professionals, the most actionable. It doesn't require a publication. It doesn't require that a journalist write about you. It requires that you be recognized as an expert qualified to evaluate the work of your peers — and that you actually do so in a documented, verifiable context.</p>
+
+      <h2>What USCIS Accepts as Judging Evidence</h2>
+      <p>The criterion is met when you participate as a judge, reviewer, or panelist evaluating the work of others in your field. Qualifying activities include: serving on the review panel for a scientific journal, judging a competition or hackathon in your area of expertise, reviewing grant applications for a foundation or government body, evaluating startup pitches for an accelerator or investment committee, and serving on an academic thesis examination committee.</p>
+      <p>The key is that the judging must be in your field, you must have been selected for the role (not simply volunteered), and the context must be verifiable. A participation certificate from the organizer, combined with a letter explaining the selection process and the caliber of the event, is the baseline documentation required.</p>
+
+      <h2>Why Hackathons Work Well</h2>
+      <p>Major hackathons — think those associated with well-known companies, universities, or industry associations — have several properties that make them excellent judging evidence. First, they run annually, giving you predictable windows to apply for judging roles. Second, many of them document their judging panels publicly, which provides corroborating evidence beyond the letter you receive. Third, the selection process at serious events involves vetting judges for expertise, which creates the kind of documented recognition that strengthens a petition.</p>
+      <p>An event where you evaluated 12 teams competing for $250,000 in prizes, selected from a pool of 80 nominated industry experts, produces far more compelling evidence than reviewing a handful of papers for a small academic workshop. Caliber matters.</p>
+
+      <h2>Building a Judging Portfolio</h2>
+      <p>For most professionals, two to four documented judging credits, at events of meaningful scale and selectivity, is sufficient to satisfy this criterion compellingly. The mistake is collecting quantity at the expense of quality — five low-profile judging credits do not add up to one strong one. Prioritize events where: (1) the selection process for judges is documented and competitive, (2) the prizes or outcomes being judged are substantial, (3) the organizations involved are recognizable to a lay adjudicator, and (4) you can obtain a detailed supporting letter from the organizer.</p>
+    `
+  },
+  {
+    slug: 'critical-contributions-evidence',
+    title: 'Critical Contributions: How to Document Technical Impact for USCIS',
+    category: 'Evidence',
+    date: '2026-02-21',
+    readTime: 9,
+    author: 'marcus',
+    excerpt: 'Criterion 5 — original contributions of major significance — is the most powerful evidence type in a petition, and the hardest to document correctly.',
+    cover: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=525&fit=crop',
+    body: `
+      <p>The critical contributions criterion is where strong petitions separate themselves from average ones. Evidence of original contributions of major significance — criterion 5 — is the single most compelling evidence type in an EB-1A filing, when it is done correctly. It is also the type most frequently mishandled.</p>
+
+      <h2>What "Major Significance" Actually Means</h2>
+      <p>USCIS does not require that your contribution changed the course of an entire discipline. It requires that your contribution had a meaningful, documented impact on your field — that your work influenced how others practice, built, research, or think. The significance must be demonstrated through evidence, not asserted through your own description of your work.</p>
+      <p>For engineers and researchers, this often means citation records, adoption metrics, or documented use of your work by third parties. For executives and product leaders, it can mean documented industry influence — other companies adopting a framework you developed, a methodology you introduced being recognized in publications, or a product you shipped that demonstrably changed user behavior at scale.</p>
+
+      <h2>The Documentation Problem</h2>
+      <p>The most common failure here is submitting evidence that demonstrates you did important work at your company, without demonstrating that your work had significance <em>beyond</em> your company. An internal performance review confirming you led a critical project is not criterion 5 evidence. The same project, covered in a TechCrunch article that explains its industry implications, accompanied by a letter from an independent expert confirming its significance — that is criterion 5 evidence.</p>
+
+      <h2>Expert Opinion Letters</h2>
+      <p>One of the most underused tools in documenting critical contributions is the independent expert opinion letter. This is a letter from a recognized authority in your field — ideally someone with no personal or professional relationship to you — who explains, in specific technical terms, why your contribution matters. These letters carry significant weight when they are genuinely independent, written by credible people, and specific about what the contribution achieved rather than merely praising the person who made it.</p>
+      <p>Vague letters of praise from colleagues do almost nothing. A letter from a professor at a top research institution who explains precisely how your published framework influenced their lab's approach, with specific examples, is among the strongest evidence you can submit.</p>
+    `
+  },
+  {
+    slug: 'membership-criterion',
+    title: 'The Membership Criterion: Which Associations Actually Count',
+    category: 'Evidence',
+    date: '2026-02-07',
+    readTime: 6,
+    author: 'daniel',
+    excerpt: 'Criterion 2 requires membership in associations requiring outstanding achievement. Not every professional organization qualifies — here is how to evaluate which ones do.',
+    cover: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=525&fit=crop',
+    body: `
+      <p>The membership criterion is often cited by attorneys as one of the easiest to satisfy — and one of the most frequently challenged by USCIS in RFEs. The regulation requires membership in associations "in the field for which classification is sought, which require outstanding achievements of their members, as judged by recognized national or international experts." That final clause is the one most applicants miss.</p>
+
+      <h2>What Makes a Membership Qualifying</h2>
+      <p>An organization that simply requires a fee and a resume to join — even a prestigious-sounding one — does not satisfy this criterion. The association must require that applicants be evaluated by recognized experts and that membership be conditional on demonstrated outstanding achievement. The IEEE Fellow designation qualifies. A standard IEEE membership does not. The National Academy of Sciences qualifies. Most industry advisory board appointments do not, unless the selection process is genuinely expert-evaluated and highly selective.</p>
+
+      <h2>The Invitation Architecture</h2>
+      <p>Because few professionals in private industry have accumulated genuine fellowship-level credentials, this criterion is frequently approached through a different angle: nominations to invitation-only programs that require expert selection. Examples include invitation-only startup advisory boards at recognized organizations, fellow programs at prominent think tanks and research institutes, and formal recognition programs at established professional associations where selection is documented and expert-judged.</p>
+      <p>The key documentation requirement: the organization must provide a letter explaining their selection criteria, confirming that selection is based on outstanding achievement, and identifying the names and credentials of the committee that evaluated your membership. Without this letter, even a legitimate qualifying membership can be challenged.</p>
+    `
+  },
+  {
+    slug: 'high-salary-criterion',
+    title: 'High Salary Evidence: How to Use Compensation Data in Your Petition',
+    category: 'Evidence',
+    date: '2026-01-17',
+    readTime: 6,
+    author: 'marcus',
+    excerpt: 'Criterion 9 — commanding a high salary relative to peers — is one of the most straightforward criteria for senior tech professionals. Here is how to use it.',
+    cover: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=525&fit=crop',
+    body: `
+      <p>The salary criterion is the most mathematically objective of the ten EB-1A criteria, which makes it both the easiest to document and the easiest to undermine. A simple comparison is not enough — the comparison must be constructed correctly.</p>
+
+      <h2>The Right Comparison</h2>
+      <p>USCIS expects a comparison between your compensation and the compensation of comparable professionals in your field, at your seniority level, in your geographic market. "Comparable" is the operative word. A staff engineer at a San Francisco tech company being compared to the average software engineer nationally is not an apples-to-apples comparison — and adjudicators will notice.</p>
+      <p>The most defensible salary evidence uses data from sources USCIS recognizes: BLS Occupational Employment Statistics, surveys from well-known compensation data providers, and peer-reviewed compensation studies published by industry associations. A custom analysis from an HR consultant, using documented methodology, can also be compelling for roles where published survey data is thin.</p>
+
+      <h2>Total Compensation Matters</h2>
+      <p>In the tech industry, base salary can be misleading as a compensation measure. If your total compensation — base plus equity plus bonus — significantly exceeds market comparables, the comparison should include total compensation rather than base salary alone. Provide documentation for all components: offer letters, vesting schedules, and any publicly available data on comparable total compensation at your company tier.</p>
+      <p>For founders and executives, compensation can be more complex. Equity alone, even at paper value, does not automatically satisfy this criterion — but a well-documented comparison of your compensation package against funded-company equivalents, combined with evidence of the company's valuation, can make a compelling argument.</p>
+    `
+  },
+  {
+    slug: 'citations-impact-factor',
+    title: 'Citations and Impact Factor: What Researchers Need to Know',
+    category: 'Evidence',
+    date: '2026-01-10',
+    readTime: 7,
+    author: 'marcus',
+    excerpt: 'For academics and researchers, the published materials criterion extends well beyond having papers. Here is how USCIS evaluates citation records and journal prestige.',
+    cover: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=525&fit=crop&crop=top',
+    body: `
+      <p>Researchers often assume that a strong publication record automatically satisfies the published materials criterion. It is more complicated than that. USCIS does not evaluate citations the way your department's promotion committee does — and a petition that reads like a tenure dossier may still receive an RFE.</p>
+
+      <h2>Citation Count vs. Citation Context</h2>
+      <p>Raw citation counts are insufficient evidence. A paper with 300 citations needs context: Who cited it? In what journals? For what purpose? A paper cited 300 times by graduate students learning the basics of a field demonstrates different significance than a paper cited 300 times by researchers building on its methodology in high-impact venues.</p>
+      <p>The best citation evidence includes: a Google Scholar or Web of Science profile showing total citation count and h-index, alongside specific examples of high-impact papers that cite your work, with brief annotations explaining what your contribution enabled.</p>
+
+      <h2>Journal Prestige and Impact Factor</h2>
+      <p>Impact factor matters, but it is not the only relevant metric. Publishing in Nature or Cell is compelling. But a paper in a specialized journal with a modest impact factor, if that journal is recognized as the authoritative venue for your specific subfield, can be equally compelling when contextualized properly. The burden is on your petition to explain why the journal matters, not to assume the adjudicator knows.</p>
+
+      <h2>The Non-Academic Complication</h2>
+      <p>Many researchers at private companies have publication records that are strong but not easily compared to academic benchmarks. If your work appears in conference proceedings rather than journals (common in computer science and engineering), you need to explain the prestige hierarchy of those conferences. CVPR, NeurIPS, ICML, and similar venues are as prestigious as high-impact journals in their respective communities — but an adjudicator without a technical background will not know this unless your petition explains it clearly.</p>
+    `
+  },
+  {
+    slug: 'what-makes-media-placement-major',
+    title: 'What Makes a Media Placement "Major" Under USCIS Standards',
+    category: 'Media',
+    date: '2026-03-03',
+    readTime: 8,
+    author: 'sophia',
+    excerpt: 'Not every article that mentions your name counts as major media coverage. Here is the framework for evaluating whether a placement will actually move your petition.',
+    cover: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=525&fit=crop',
+    body: `
+      <p>The published materials criterion asks for "published material in professional or major trade publications or other major media." The word "major" is not defined in the regulation — which means adjudicators use their judgment, and your petition must give them the context to judge correctly.</p>
+
+      <h2>The Three Tests for Major Media</h2>
+      <p>Courts and USCIS policy guidance have coalesced around three rough indicators: circulation or audience size, the publication's prominence and reputation within the field, and the nature of the coverage itself (a full profile versus a passing mention). A publication does not need to satisfy all three maximally — but a placement that scores poorly on all three will not carry weight.</p>
+      <p>Forbes, Bloomberg, TechCrunch, Wired, The Information, MIT Technology Review, and similar publications satisfy the first two tests for nearly any field. Niche but highly regarded publications — say, a respected healthcare industry journal with a specialized readership of 40,000 — can satisfy the second test even with a smaller audience, provided the petition explains the journal's prestige within the relevant professional community.</p>
+
+      <h2>Coverage Quality: Profile vs. Mention</h2>
+      <p>The nature of coverage matters as much as the platform. A 600-word profile that opens with your name in the headline, describes your background, quotes you on your work, and explains its significance to the field is strong evidence. A round-up article listing "ten professionals to watch" where you appear as entry number seven with a two-sentence description is much weaker — and can actually hurt your petition if it is the only media evidence you submit.</p>
+
+      <h2>The Annotation Requirement</h2>
+      <p>Every media placement you include in your petition should be accompanied by an annotation explaining the publication's relevance, its circulation or audience, and its standing in the field. Do not assume the adjudicator recognizes TechCrunch or knows that it reaches 12 million monthly readers. Assume nothing. A one-paragraph annotation for each exhibit — written by your attorney or by the strategist who helped you obtain the placement — can be the difference between a placement being given full weight and being dismissed as minor.</p>
+    `
+  },
+  {
+    slug: 'how-to-get-published-in-forbes',
+    title: 'How to Get a Feature Story in Forbes as a Tech Professional',
+    category: 'Media',
+    date: '2026-02-24',
+    readTime: 10,
+    author: 'sophia',
+    excerpt: 'A Forbes feature is among the most compelling media placements for an EB-1 or O-1 petition. Here is what the process actually looks like.',
+    cover: 'https://images.unsplash.com/photo-1586339949216-35c2747cc36d?w=1200&h=525&fit=crop',
+    body: `
+      <p>Let us be direct about something: a Forbes feature does not happen because you fill out a contact form on their website. It happens because a journalist who covers your space decides that your story, your expertise, or your perspective serves their readers — and they have enough of a relationship with you, or enough of a hook, to make the pitch internally and commit their byline to it.</p>
+
+      <h2>How Forbes Actually Works</h2>
+      <p>Forbes operates through a mix of staff journalists and a large contributor network. Staff journalists pursue their own stories and respond to strong pitches with genuine news hooks — a funding round, a product launch, a study you published, a significant industry development that your expertise makes you uniquely qualified to explain. Contributors write on topics within their beat, often sourcing expert quotes and subject interviews.</p>
+      <p>Both pathways can produce qualifying visa evidence, but they work differently. A staff journalist profile carries somewhat more editorial weight. A contributor piece that quotes you extensively and describes your work can be equally compelling, provided the framing is about you and your contributions rather than a generic industry trend where you are one of many quoted sources.</p>
+
+      <h2>The Pitch Architecture</h2>
+      <p>A pitch that results in a feature has three components: a specific journalist whose beat matches your work, a concrete news hook (not "I'm an interesting person — here is my story"), and a clear value proposition for the journalist's readers. "Our team shipped a system that reduced diagnostic error rates by 34% in a controlled trial" is a news hook. "I'm a senior AI researcher who has worked on interesting problems" is not.</p>
+      <p>Timing matters. Journalists are most receptive to pitches tied to current conversations in their coverage area. If there is a major regulatory development, a high-profile controversy, or a recent research publication in your field, a pitch that positions you as an expert who can contextualize those developments will land far better than a cold approach with no news hook.</p>
+
+      <h2>What Disqualifies a Placement for Visa Purposes</h2>
+      <p>Two things reduce the value of a Forbes placement for visa evidence: if the article is primarily about your company rather than about you as an individual expert, and if you are one of many people quoted. The visa evidence standard requires that the coverage is about you — your expertise, your contributions, your trajectory. A company announcement in which your name appears once in a quote does not satisfy the criterion. Ensure the placement frames you as the individual story, not just a spokesperson for an organization.</p>
+    `
+  },
+  {
+    slug: 'press-about-you-vs-articles-you-wrote',
+    title: 'Press About You vs. Articles You Wrote: The Crucial Distinction',
+    category: 'Media',
+    date: '2026-02-10',
+    readTime: 5,
+    author: 'sophia',
+    excerpt: 'Two very different types of published content — and USCIS weighs them differently. Understanding the distinction avoids a common petition error.',
+    cover: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&h=525&fit=crop',
+    body: `
+      <p>The EB-1A published materials criterion covers "published material about the alien in professional or major media." That phrase — "about the alien" — is specific. It means coverage of you and your work, written by someone else. It does not mean articles or thought leadership pieces that you authored and published.</p>
+
+      <h2>Why This Distinction Matters</h2>
+      <p>We regularly review evidence packages from professionals who have published extensively as contributors — Forbes Councils pieces, LinkedIn articles, guest posts on industry blogs. They assume this output constitutes published material evidence. It does not satisfy criterion 3 as written, though it may have indirect value by demonstrating thought leadership that contributed to other recognition.</p>
+      <p>What satisfies criterion 3: a journalist writes about you, your work, your company (with you as the central figure), or your expertise. The publication runs the piece. You are the subject, not the author. The more the piece is specifically about you and your contributions — rather than an industry trend that happens to include a quote from you — the stronger the evidence.</p>
+
+      <h2>Authored Articles Under Criterion 6</h2>
+      <p>There is a separate criterion — criterion 6 — for authorship of scholarly articles in professional journals. This covers academic papers, peer-reviewed publications, and in some interpretations, substantial industry publications. If you have authored papers or significant industry research, this criterion may be satisfied separately and independently from the press coverage criterion.</p>
+      <p>The practical takeaway: build both. Authored publications satisfy criterion 6. Press coverage about you satisfies criterion 3. They are distinct evidence types serving distinct criteria, and a strong petition often benefits from having both.</p>
+    `
+  },
+  {
+    slug: 'niche-vs-mainstream-media',
+    title: 'Niche Industry Journals vs. Mainstream Media: What Adjudicators Weigh More',
+    category: 'Media',
+    date: '2026-01-24',
+    readTime: 7,
+    author: 'sophia',
+    excerpt: 'Forbes has name recognition. Your field\'s leading industry journal has credibility within the community. Here is how to balance your media portfolio.',
+    cover: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1200&h=525&fit=crop',
+    body: `
+      <p>There is a temptation to optimize exclusively for brand-name publications in an EB-1 evidence package — Forbes, Bloomberg, TechCrunch. The logic is that adjudicators will recognize these names and give them weight. This is true, but incomplete.</p>
+
+      <h2>The Specialist Credibility Problem</h2>
+      <p>For highly specialized fields — computational genomics, quantitative finance, embedded systems, materials science — mainstream media coverage is difficult to obtain and often superficial when it happens. A journalist writing a general-audience Forbes piece may describe your work correctly but without the technical depth that demonstrates genuine significance to field insiders.</p>
+      <p>A feature in <em>Nature Biotechnology</em>, <em>IEEE Spectrum</em>, or the equivalent leading publication for your specific field signals something different: that the community of your direct peers considers your work noteworthy. This kind of coverage can be more compelling to a technically sophisticated adjudicator or, more importantly, to the expert opinion letters that accompany your petition.</p>
+
+      <h2>Building a Mixed Portfolio</h2>
+      <p>The strongest media evidence packages combine both. One or two mainstream media placements establish that your work has broader significance beyond the specialist community. Two or three specialist publications demonstrate that your peers recognize your contributions. Each type reinforces the other: the mainstream coverage shows you can communicate your work's importance to a general audience; the specialist coverage shows that your own community validates it.</p>
+      <p>The annotation for specialist placements must work harder. A publication that reaches 80,000 subscribers in a specialized field needs a paragraph explaining why those 80,000 readers are the people whose recognition matters most. An adjudicator who has never heard of the journal cannot assess it without context — and will default to discounting it if none is provided.</p>
+    `
+  },
+  {
+    slug: 'anatomy-of-perfect-expert-quote',
+    title: 'The Anatomy of a Perfect Expert Quote for Visa Evidence',
+    category: 'Media',
+    date: '2026-01-03',
+    readTime: 6,
+    author: 'sophia',
+    excerpt: 'The quotes that appear in media coverage about you can carry significant evidentiary weight — or almost none. Here is what makes the difference.',
+    cover: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=525&fit=crop',
+    body: `
+      <p>When a journalist publishes a profile or feature about you, they often include quotes from peers or colleagues about your work. These quotes appear incidentally in the article, but from an immigration evidence standpoint, they carry independent weight as third-party expert validation.</p>
+
+      <h2>What Makes a Quote Evidentially Strong</h2>
+      <p>Specificity. A quote that says "She's one of the best people I've worked with in this field" is useless as visa evidence — it is generic praise that conveys nothing about what the subject has achieved or why it matters. A quote that says "Her work on transformer architecture optimization produced the first practical solution to the inference latency problem that the field had been circling for three years — every team I know of has examined it" is specific, technical, and verifiable.</p>
+      <p>The person being quoted also matters. A quote from a peer at the same seniority level is less compelling than a quote from a recognized authority in the field: a professor, a senior researcher at a prestigious institution, or a named leader at a major organization. If the journalist's article already names the quoted person's credentials, that attribution does part of the evidentiary work for you.</p>
+
+      <h2>Working With Journalists on Coverage</h2>
+      <p>Professionals sometimes wonder whether they can influence who a journalist quotes and what those quotes say. Journalists typically source their own quotes — but you can suggest names of colleagues or collaborators whose perspectives would be useful to the story. A journalist writing a profile about an engineer's work on autonomous systems might welcome the suggestion to contact a professor at MIT who can explain why the work is technically significant. The journalist makes the call independently, but the introduction comes from you.</p>
+      <p>This is not manipulation — it is part of normal source-facilitation between publicists and journalists. Be transparent with the journalist about the relationship, and allow them to decide whether to use the source. The result, if they proceed, is a genuinely independent validation that carries full evidentiary weight.</p>
+    `
+  },
+  {
+    slug: 'conference-speaking-for-visa',
+    title: 'Conference Speaking for Visa Purposes: What Counts and What Does Not',
+    category: 'Speaking',
+    date: '2026-03-17',
+    readTime: 8,
+    author: 'daniel',
+    excerpt: 'Not all speaking engagements are equal under USCIS standards. Here is a precise framework for evaluating which ones serve your petition.',
+    cover: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=525&fit=crop',
+    body: `
+      <p>Speaking at conferences serves the EB-1A evidence framework in at least two ways: it can contribute to the critical role criterion (evidence that you perform in a critical or essential capacity at distinguished organizations), and it can generate media coverage and expert recognition that feeds other criteria. But as a standalone evidence type, speaking at events is more nuanced than many applicants assume.</p>
+
+      <h2>The Selection Process Is the Evidence</h2>
+      <p>USCIS does not care that you gave a talk. What matters is that a distinguished organization, through a competitive and expert-led selection process, chose you to represent your field to their audience. A speaking slot is evidence of recognition when the process that produced it was selective and credible.</p>
+      <p>A submitted conference paper that was accepted through peer review is different from a panel invitation issued because you are a sponsor of the event. A keynote at a conference with 5,000 attendees and a documented application and selection process is different from a lunch-table lightning talk at a community meetup. The documentation of the selection process — how many people applied, who reviewed applications, what criteria were used — is as important as the speaking credit itself.</p>
+
+      <h2>What Counts</h2>
+      <p>Qualifying speaking engagements generally include: keynotes at well-attended industry or academic conferences with documented competitive selection, invited talks (distinguished from submitted papers accepted through regular review), plenary sessions, and named lectures at universities or research institutions. Panels can qualify when your role on the panel was specifically sought — when the organizer chose you from a field of candidates rather than simply filling a seat.</p>
+
+      <h2>What Is Borderline</h2>
+      <p>Webinars, podcast appearances, internal company all-hands talks, and local meetup presentations are generally not strong visa evidence, regardless of how large the audience. The key is external recognition by an organization with established credibility and a meaningful selection process. A podcast appearance can, however, generate media evidence under the published materials criterion if the podcast is well-documented, has a substantial subscriber base, and the content is about your work specifically.</p>
+    `
+  },
+  {
+    slug: 'how-to-get-conference-speaking-slot',
+    title: 'How to Get a Speaking Slot at a Tier-1 Tech Conference',
+    category: 'Speaking',
+    date: '2026-02-18',
+    readTime: 9,
+    author: 'daniel',
+    excerpt: 'The application process, the pitch structure, and the timeline — a practical guide to landing speaking slots that serve both your career and your visa case.',
+    cover: 'https://images.unsplash.com/photo-1559223607-b4d0555ae227?w=1200&h=525&fit=crop',
+    body: `
+      <p>Speaking at a major conference requires the same advance planning as landing a media placement — the difference is that the lead times are longer and the process is more opaque. Most applicants who approach us six months before their filing deadline have missed the submission windows for the events that would have served them best.</p>
+
+      <h2>Understanding the Conference Calendar</h2>
+      <p>Major tech conferences publish their Call for Speakers (CFS) six to nine months before the event. NeurIPS, ICLR, and CVPR operate on academic paper submission cycles with deadlines in June–September for December–February conferences. Industry conferences like Web Summit, SaaStr, and Collision typically publish CFS in spring for fall events. AWS re:Invent, Google I/O, and similar major tech company events have more selective processes — often invitation-only for keynotes, with some open application tracks.</p>
+      <p>Map your 18-month timeline against the calendars of the five to ten events that would be most credible for your field. You may find that you have one or two realistic application windows in the relevant period — which means missing the deadline is costly.</p>
+
+      <h2>The Anatomy of a Strong Speaker Proposal</h2>
+      <p>Conference curators are not selecting the most expert person in the room. They are selecting the most compelling story for their specific audience. Your proposal must answer four questions: What will attendees learn? Why are you the right person to teach it? Why does this topic matter right now? What is the format and energy of the session?</p>
+      <p>The most successful proposals are specific, not broad. "Machine Learning for Enterprise" is too broad. "Why Most Enterprise ML Deployments Fail in Production — and the Three Architectural Choices That Prevent It" is specific, immediately valuable, and positions you as an expert with a concrete perspective. Curators receive hundreds of proposals; the ones with sharp, specific premises rise to the top.</p>
+
+      <h2>Invitation vs. Open Application</h2>
+      <p>For the events that matter most to your petition, aim for invited talks if possible. Reaching out to conference curators directly — through your network, through shared connections, or through a PR agency with existing relationships — and expressing interest in speaking can result in an invitation that bypasses the open application process entirely. These invitations carry stronger evidentiary weight because they are explicitly selective, not merely competitive.</p>
+    `
+  },
+  {
+    slug: 'tedx-vs-ted-visa',
+    title: 'TEDx vs TED: Does the Distinction Matter to USCIS',
+    category: 'Speaking',
+    date: '2026-02-03',
+    readTime: 5,
+    author: 'daniel',
+    excerpt: 'Both carry the TED brand. The evidentiary value for visa purposes is meaningfully different.',
+    cover: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f?w=1200&h=525&fit=crop',
+    body: `
+      <p>The short answer: yes, the distinction matters — but not in the way most people assume.</p>
+
+      <h2>What TED and TEDx Actually Are</h2>
+      <p>TED is a curated global conference featuring invitation-only speakers. The selection process is genuinely selective, the audience is substantial, and a TED talk carries strong evidentiary weight as a critical role at a distinguished organization with demonstrated prestige.</p>
+      <p>TEDx events are independently organized under license from TED. The license allows communities, universities, and organizations to host their own TED-format events. The selection process, audience size, and prestige vary enormously. A TEDx at MIT, organized by the university's media lab and attended by 2,000 people, is a different credential than a TEDx organized by a local community group in a conference room attended by 80 people.</p>
+
+      <h2>The Documentation Standard</h2>
+      <p>A TEDx appearance can serve as qualifying evidence when the event is documented as having a meaningful audience reach (particularly through online viewership, since most TEDx talks are published to YouTube and some accumulate significant views), a documented selection process, and organizational backing from a recognized institution. The YouTube view count is particularly useful: a TEDx talk with 180,000 views on the TED YouTube channel is effectively a documented media publication with a substantial audience.</p>
+      <p>The evidentiary argument is cleaner for a talk with documented online reach than for an event whose only footprint is a certificate and a small live audience. Prioritize TEDx events hosted by universities or major companies over community-organized events, and document both the live attendance and the subsequent online viewership when building your exhibits.</p>
+    `
+  },
+  {
+    slug: 'panels-keynotes-workshops-uscis',
+    title: 'Panels, Keynotes, and Workshops: How USCIS Weighs Different Speaking Formats',
+    category: 'Speaking',
+    date: '2026-01-20',
+    readTime: 6,
+    author: 'daniel',
+    excerpt: 'The format of your speaking engagement affects how it is interpreted as visa evidence. Here is a breakdown by format type.',
+    cover: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=525&fit=crop',
+    body: `
+      <p>Not all speaking engagements serve the same evidentiary function, even at the same event. How your role is framed — keynote, panel, workshop leader, invited lecture — influences both the strength of the evidence and how it should be positioned in your petition.</p>
+
+      <h2>Keynotes: The Strongest Speaking Evidence</h2>
+      <p>A keynote is a sole-speaker, high-prominence talk typically delivered to the full conference audience. Keynotes are almost always by invitation, signal organizational endorsement by the event, and are frequently documented publicly. For visa purposes, a keynote at a major conference is among the most compelling speaking credentials. The supporting letter should confirm that you were invited (not selected through competitive submission), explain the basis for the invitation, and note the audience size and the conference's standing in the field.</p>
+
+      <h2>Panels: Qualifying but Contextual</h2>
+      <p>Panel appearances require more careful documentation. The critical question is whether you were specifically recruited for the panel or whether you applied and were accepted alongside many others. An organizer who says "we selected our panelists from 340 nominations based on their expertise in X" is describing a different process than "we had five open seats and you applied and were accepted." The first is more compelling evidence of recognition. Both can qualify, but the documentation must be specific about the selection rationale.</p>
+
+      <h2>Workshops and Master Classes</h2>
+      <p>Invited workshops — where the organizer specifically sought your expertise to teach a skill or methodology to a professional audience — are underused evidence sources. A workshop positions you as an expert whose knowledge is valuable enough that an established organization created a dedicated session to transmit it. The evidence is strongest when the workshop is documented as invitation-only for attendees, or when the organizer's letter specifically describes why your expertise was sought.</p>
+    `
+  },
+  {
+    slug: 'eb1-academic-researchers',
+    title: 'EB-1 for Academic Researchers: Building a Case Beyond Publication Count',
+    category: 'Field Guides',
+    date: '2026-03-01',
+    readTime: 9,
+    author: 'marcus',
+    excerpt: 'Publication records and citation counts get researchers close to the bar. The evidence that actually wins petitions goes further.',
+    cover: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&h=525&fit=crop',
+    body: `
+      <p>Researchers who approach EB-1A preparation as an extension of their tenure dossier often find themselves with strong criterion 6 evidence (scholarly authorship) and criterion 5 evidence (original contributions) but weak evidence across the other criteria that adjudicators also require. Publication count and citation index are necessary but not sufficient.</p>
+
+      <h2>The Criteria Where Academic Records Fall Short</h2>
+      <p>A researcher who has published 40 peer-reviewed papers and holds an h-index of 22 has compelling raw credentials. But if their only non-academic public footprint is a department web page and a Google Scholar profile, they are likely relying on only two criteria: scholarly authorship and critical contributions. They need one more — and ideally two, to provide redundancy against RFE challenges.</p>
+      <p>The criteria most accessible to researchers beyond publications: judging (journal peer review, grant panels, thesis committees), awards and prizes (including grant awards, which USCIS has accepted as evidence of prizes for excellence), and media coverage (academic research covered by mainstream science journalists at outlets like Science, Nature News, MIT Technology Review, or general tech and business media).</p>
+
+      <h2>Translating Your Research for General Audiences</h2>
+      <p>Many researchers are uncomfortable with the self-promotion implied in media outreach. The reframe that tends to work: a Forbes or Bloomberg story about your research is not primarily self-promotion — it is public communication of scientific work, a skill that funding agencies and university communications departments actively want researchers to develop. University PR offices exist precisely to facilitate this kind of coverage and are usually eager to help.</p>
+
+      <h2>Grant Awards as Prize Evidence</h2>
+      <p>NSF, NIH, DoE, and similar federal grant awards have been accepted as evidence of prizes for excellence in the field, particularly when the award is accompanied by documentation of the peer-review process, the selection rate, and the significance of the funded work. An NIH R01 grant, for example, is awarded through a highly competitive process with documented expert review — this maps cleanly to the prizes criterion when framed correctly.</p>
+    `
+  },
+  {
+    slug: 'o1b-artists-designers',
+    title: 'What Artists and Designers Need to Know About O-1B',
+    category: 'Field Guides',
+    date: '2026-02-16',
+    readTime: 8,
+    author: 'sophia',
+    excerpt: 'O-1B covers "extraordinary achievement" in the arts — a standard that is evaluated differently from O-1A and EB-1A, with a different evidence architecture.',
+    cover: 'https://images.unsplash.com/photo-1561839697-96b4f6b22c53?w=1200&h=525&fit=crop',
+    body: `
+      <p>O-1B and O-1A share the O-1 nonimmigrant classification, but the "extraordinary achievement" standard for O-1B is evaluated against industry norms in the arts — meaning the benchmark is how people at the top of their creative field are recognized, not how academics or engineers are recognized. This changes both the criteria and the evidence architecture substantially.</p>
+
+      <h2>The O-1B Evidence Framework</h2>
+      <p>O-1B evidence typically draws from these categories: performance of a lead or starring role in productions with distinguished reputation, critical recognition or notices, high salary or remuneration relative to peers, commercial or critically acclaimed successes, significant recognition from organizations, critics, or experts in the field, and comparable evidence demonstrating extraordinary achievement.</p>
+      <p>For visual artists and designers, the "comparable evidence" category is often the most relevant and the most flexible. Design awards from recognized bodies (ADC, D&AD, Cannes Lions, Communication Arts, Core77), exhibition history at recognized galleries or institutions, commissions from prestigious clients, and coverage in major design and art publications all fall within this framework.</p>
+
+      <h2>The Commercial Success Dimension</h2>
+      <p>Unlike O-1A, commercial success is explicitly listed as an O-1B criterion. Revenue, streaming numbers, box office performance, product sales — all of these can contribute to the evidentiary record. For designers whose work has been deployed at scale (a widely distributed product, a major brand identity), documenting the commercial reach of that work can be compelling evidence that would not fit neatly into the O-1A framework.</p>
+
+      <h2>Advisory Opinions</h2>
+      <p>O-1B petitions require a consultation from a peer group, labor organization, or management organization with expertise in the field (or a union in certain motion picture contexts). This advisory opinion is a required exhibit, not optional. Plan for the time required to obtain it — for creative fields without formal unions, identifying the appropriate peer group and requesting the opinion can take four to six weeks.</p>
+    `
+  },
+  {
+    slug: 'startup-founders-eb1',
+    title: 'Startup Founders: Using Funding Rounds and Press as Extraordinary Evidence',
+    category: 'Field Guides',
+    date: '2026-02-02',
+    readTime: 8,
+    author: 'marcus',
+    excerpt: 'Startup founders occupy an unusual position in the EB-1A framework. The evidence that matters for investors is different from what matters for USCIS.',
+    cover: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&h=525&fit=crop',
+    body: `
+      <p>A founder who has raised a Series B, been covered in TechCrunch and Forbes, and been named to the Forbes 30 Under 30 list has more EB-1A evidence than they usually realize — and different gaps than they expect.</p>
+
+      <h2>Funding as Evidence</h2>
+      <p>Venture funding is not a prize — it is an investment made with the expectation of financial return. USCIS has been inconsistent about accepting funding rounds as direct criterion evidence, and some adjudicators explicitly reject the framing. However, funding news generates press coverage, and that press coverage can be compelling evidence of recognition and significance. A Series B announcement that lands in Bloomberg, with a journalist explaining the market opportunity and why investors chose this company, creates multiple evidence artifacts simultaneously.</p>
+      <p>Additionally, the company's growth and commercial success — documented revenue, user base, or valuation — can contribute to the critical role criterion: evidence that you perform a critical role at a distinguished organization. A company with a nine-figure valuation may qualify as "distinguished" under the regulatory standard, and your role as co-founder and CEO is, by definition, critical.</p>
+
+      <h2>The Recognition Gap Most Founders Have</h2>
+      <p>Most founders are strong on media coverage about their company but weak on media coverage about them as individuals. TechCrunch writes about the company. The founder's name appears once, in the CEO attribution. This is weak visa evidence. What is needed is coverage that focuses on the founder as an expert, innovator, or industry authority — not just as the head of a funded startup.</p>
+
+      <h2>The List Problem</h2>
+      <p>Recognition lists — Forbes 30 Under 30, Inc. 5000, Fast Company Most Creative People — are often the first evidence founders cite. They can qualify under the prizes criterion, but their weight varies. Forbes 30 Under 30 is well-known, but it is also large (30 people per category, 20+ categories, annually) and covers a broad range of backgrounds. A more selective, field-specific award — a named prize from an industry association, a recognized innovation award in your specific sector — typically carries more evidentiary weight per entry despite lower name recognition.</p>
+    `
+  },
+  {
+    slug: 'eb1-healthcare-professionals',
+    title: 'EB-1 for Healthcare Professionals: The Evidence That Moves Adjudicators',
+    category: 'Field Guides',
+    date: '2026-01-26',
+    readTime: 8,
+    author: 'marcus',
+    excerpt: 'Physicians, surgeons, and clinical researchers occupy a distinctive position in EB-1 applications — strong on credentials, often weak on public-facing evidence.',
+    cover: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=525&fit=crop',
+    body: `
+      <p>Healthcare professionals applying for EB-1A often have credentials that look extraordinary on paper — board certifications, fellowship training, academic appointments, publications in NEJM or JAMA — but evidence packages that struggle to translate those credentials into the evidentiary framework USCIS actually uses.</p>
+
+      <h2>The Credentialing vs. Recognition Gap</h2>
+      <p>Board certification and fellowship training demonstrate competence, not extraordinary ability. They show that you met a defined standard — one that thousands of other practitioners also met. For EB-1A purposes, what matters is that you are recognized as being among the small percentage at the very top of that already credentialed field.</p>
+      <p>The evidence that makes this argument: publications in high-impact journals with documented citation records, speaking invitations at major medical conferences, expert consultation requests from institutions or government bodies, media coverage in major health or science publications, peer nominations to selective professional societies, and leadership roles in clinical trials or significant multi-institutional studies.</p>
+
+      <h2>Accessing Media Coverage as a Clinician</h2>
+      <p>Healthcare journalists at Bloomberg Health, STAT News, Medscape, and major daily newspapers regularly cover medical research and clinical innovation. Physicians who have published significant research, developed new treatment protocols, or led innovation initiatives are natural sources for these journalists. University communications offices are often underused by busy clinicians — reaching out to your institution's PR team and describing your research agenda can unlock media relationships you would not have accessed independently.</p>
+
+      <h2>The Critical Role Criterion for Academic Medicine</h2>
+      <p>Physicians with faculty appointments at academic medical centers may have access to evidence many miss: division director roles, committee leadership within major professional societies, principal investigator status on multi-center trials. These roles, when documented properly — with a letter from the department chair explaining what "critical" means in context, and what the institution's standing is — can be compelling critical role evidence.</p>
+    `
+  },
+  {
+    slug: 'software-engineers-extraordinary-ability',
+    title: 'Software Engineers and the Extraordinary Ability Standard',
+    category: 'Field Guides',
+    date: '2026-01-12',
+    readTime: 8,
+    author: 'marcus',
+    excerpt: 'Software engineering is a large, well-compensated field with a genuine hierarchy of recognition. Here is how to build a petition that reflects where you actually stand in it.',
+    cover: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=525&fit=crop',
+    body: `
+      <p>Software engineers face a specific challenge in EB-1A petitions: the field is enormous, the median salary is high enough that salary alone rarely distinguishes, and the recognition hierarchy is real but less institutionalized than in academia or the arts. The engineers who file successful EB-1A petitions have usually built public records that extend meaningfully beyond their employment history.</p>
+
+      <h2>Where Recognition Lives in Software Engineering</h2>
+      <p>Open source contributions with significant adoption. Conference talks at major events (WWDC, Google I/O, Strange Loop, QCon, specialized domain conferences). Publications in peer-reviewed venues like OSDI, SOSP, USENIX, or ACM conferences for systems work; NeurIPS, ICML, ICLR for ML. GitHub profile with substantial stars and forks on your repositories. Patents — especially granted patents with clear commercial application. Technical blog posts on company engineering blogs that received substantial industry attention.</p>
+      <p>Not all of these translate directly to EB-1A criteria, but they are the substrate from which criteria evidence is built. A blog post with 80,000 Hacker News upvotes and coverage in multiple industry publications is evidence of contributions of major significance. An open-source tool with 12,000 GitHub stars, adopted by dozens of companies, demonstrates the same.</p>
+
+      <h2>The Salary Evidence Opportunity</h2>
+      <p>For senior engineers at top-tier companies — L6+ at Google/Meta/Apple, Staff/Principal at comparable employers, or any senior role in quantitative finance or crypto — total compensation often significantly exceeds published BLS averages for software developers, even at the 90th percentile. A properly constructed compensation comparison using appropriate peer-group data (staff engineers at major tech companies in the relevant metro area) can be the most straightforward criterion to satisfy.</p>
+
+      <h2>The Open Source Wildcard</h2>
+      <p>Open source contributions are an unusual asset in EB-1A petitions because they generate multiple types of evidence simultaneously: the codebase itself documents original contribution, the adoption metrics demonstrate significance, and the community discussion (GitHub issues, Stack Overflow references, conference talks about your project) provides third-party documentation of that significance. A well-documented open source credential can satisfy criterion 5 (critical contributions) more compellingly than many alternatives.</p>
+    `
+  },
+  {
+    slug: 'rfe-triggers-eb1a',
+    title: 'The 10 Most Common EB-1A RFE Triggers (and How to Avoid Each One)',
+    category: 'Process',
+    date: '2026-03-18',
+    readTime: 10,
+    author: 'marcus',
+    excerpt: 'An RFE is not a denial — but it adds months to your timeline and signals a weakness in your initial filing. Here are the issues that generate RFEs most consistently.',
+    cover: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=525&fit=crop',
+    body: `
+      <p>A Request for Evidence is USCIS's way of telling you that your petition, as filed, does not satisfy the evidentiary standard on one or more criteria. The agency cannot deny without first providing an opportunity to respond — but the RFE adds three to six months to your timeline, creates additional cost, and forces you to supplement a record that was already submitted. Avoiding RFEs is mostly a function of building and presenting your evidence correctly before filing.</p>
+
+      <h2>The Most Common RFE Triggers</h2>
+      <p><strong>1. Generic letters of support.</strong> "This person is exceptional in their field" written by a professional colleague provides essentially no evidentiary value. USCIS expects letters from independent experts who can speak specifically about your contributions and why they are significant.</p>
+      <p><strong>2. Unsupported claims about publication significance.</strong> Submitting articles without annotating circulation, readership, and the publication's standing in the field is among the most common RFE triggers. Adjudicators cannot independently assess whether a publication is "major" without context.</p>
+      <p><strong>3. Judging credits without selection documentation.</strong> A certificate showing you judged an event is insufficient. The organization's letter must explain how you were selected, the caliber of the event, and why expert evaluation was required.</p>
+      <p><strong>4. Mismatched specialty.</strong> Evidence in a different subfield than the one you are petitioning for is challenged regularly. If you are petitioning as an AI researcher but your media coverage is about your company's broader business, the connection needs explicit bridging.</p>
+      <p><strong>5. Thin final merits arguments.</strong> Satisfying three criteria with minimum evidence does not close the case. The petition must make an affirmative argument that the totality of evidence demonstrates sustained national or international acclaim. This is a separate section of the brief, not implied by the exhibits.</p>
+      <p><strong>6. High salary without proper comparator construction.</strong> A salary comparison that uses the wrong peer group — national average vs. local market, junior roles vs. senior, or a different industry — will generate a challenge. The comparator must be specific and defensible.</p>
+      <p><strong>7. Awards with missing context.</strong> Naming an award without explaining the selection criteria, the awarding body's standing, and the competitive field creates uncertainty that adjudicators resolve unfavorably.</p>
+      <p><strong>8. Published work with no impact documentation.</strong> Authorship of scholarly articles must be accompanied by evidence of the journal's standing and, ideally, the article's reception. Citation counts, download metrics, or follow-on research that builds on the work all contribute here.</p>
+      <p><strong>9. Critical role evidence at an insufficiently distinguished organization.</strong> A company must be documented as "distinguished" — not merely "large" or "successful." Market leadership, industry recognition, and documentation of the organization's standing in its field are all relevant.</p>
+      <p><strong>10. Outdated evidence.</strong> Adjudicators assess your current standing in the field, not a historical peak. Evidence more than five to seven years old is discounted unless it is specifically framed as part of a sustained, continuing pattern of recognition that extends to the present day.</p>
+    `
+  },
+  {
+    slug: 'premium-processing-eb1',
+    title: 'Premium Processing for EB-1: When It Is Worth the Extra Cost',
+    category: 'Process',
+    date: '2026-02-25',
+    readTime: 5,
+    author: 'daniel',
+    excerpt: 'Premium processing guarantees a 15-business-day response — but "response" is not the same as "approval." Here is how to decide whether to use it.',
+    cover: 'https://images.unsplash.com/photo-1580828343064-fde4fc206bc6?w=1200&h=525&fit=crop',
+    body: `
+      <p>Premium processing for I-140 petitions currently costs $2,805 and guarantees USCIS will issue a response — approval, denial, or RFE — within 15 business days. It is not optional for every petitioner; it is a tool with specific use cases where the cost is clearly worth it and others where it is unnecessary.</p>
+
+      <h2>When Premium Processing Makes Sense</h2>
+      <p>The clearest case for premium processing is a deadline constraint. If your H-1B or other status expires within four months, or if a new job offer is contingent on an approved I-140, waiting 6–18 months for standard processing is not viable. Premium processing compresses a multi-month uncertainty into a known three-week window.</p>
+      <p>A second use case: parallel O-1A filing. If you are simultaneously pursuing an O-1A extension and an EB-1A I-140, premium processing the I-140 can provide clarity on the immigrant pathway before your current nonimmigrant status requires renewal action.</p>
+
+      <h2>When Premium Processing Does Not Help</h2>
+      <p>If your petition is not yet ready — if you are still assembling evidence and your attorney flags significant gaps — premium processing does not solve the underlying problem. A 15-day RFE is still an RFE, and responding to it still takes time. Filing a weak petition quickly is worse than filing a strong petition slowly. The only correct answer to "should I file with premium processing?" is "yes, when your petition is ready to be filed."</p>
+      <p>Also note: an RFE issued under premium processing does not extend the 15-day window for a final decision. The clock resets after your RFE response is received, and you are then back in standard processing time for the response to that response.</p>
+    `
+  },
+  {
+    slug: 'surviving-rfe-without-starting-over',
+    title: 'How to Survive an RFE Without Starting Over',
+    category: 'Process',
+    date: '2026-02-11',
+    readTime: 7,
+    author: 'marcus',
+    excerpt: 'An RFE is not a denial. Here is how to respond to one effectively — and how to avoid the common mistakes that turn an RFE into a denial.',
+    cover: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&h=525&fit=crop',
+    body: `
+      <p>Receiving an RFE is distressing, but it is also extremely common — rates for EB-1A petitions have historically ranged from 30 to 50 percent in certain processing periods. An RFE is not a judgment about your qualifications. It is a request for additional documentation that satisfies specific evidentiary concerns. The outcome depends almost entirely on the quality of your response.</p>
+
+      <h2>Reading the RFE Precisely</h2>
+      <p>The first step in responding to an RFE is reading it carefully and completely. USCIS RFEs are long, technical documents that often combine multiple requests across different criteria. The response must address every single issue raised — failing to respond to even one item can result in a denial on that item, even if the response to everything else was strong.</p>
+      <p>Map each RFE request to a specific response section. Do not write a general essay about your qualifications. Address the precise concern USCIS raised, provide the specific documentation they asked for, and explain clearly how that documentation satisfies the regulatory standard they cited.</p>
+
+      <h2>Supplementing Evidence After an RFE</h2>
+      <p>An RFE that challenges the sufficiency of your judging evidence, for example, can be responded to with additional judging credits obtained after the filing date — provided they occurred before the RFE response is submitted. This is one reason why maintaining an ongoing evidence-building effort even after your petition is filed is valuable. A new speaking credit, a new media placement, or a new judging role obtained in the months between filing and RFE can strengthen your response significantly.</p>
+
+      <h2>Timeline Realities</h2>
+      <p>USCIS currently allows 87 days to respond to most EB-1A RFEs. Use the full time if needed. A rushed response that fails to address the RFE comprehensively is worse than a thorough response submitted near the deadline. If you are assembling new evidence in response to the RFE, the 87-day window may be the right amount of time to do it properly.</p>
+    `
+  },
+  {
+    slug: 'coordinating-pr-with-attorney',
+    title: 'Coordinating PR Strategy with Your Immigration Attorney',
+    category: 'Process',
+    date: '2026-01-28',
+    readTime: 6,
+    author: 'daniel',
+    excerpt: 'PR agencies and immigration attorneys serve complementary functions — but only when they are working from the same playbook.',
+    cover: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=525&fit=crop',
+    body: `
+      <p>The most common communication failure in EB-1 cases is the attorney and the PR firm operating in separate tracks, never comparing notes until the petition filing is three months away. The attorney assembles a legal brief based on the evidence they have. The PR firm delivers placements based on what they can obtain. Without coordination, the result is often a mismatch between what was built and what is legally strongest.</p>
+
+      <h2>The Coordination Framework</h2>
+      <p>The right structure: your attorney conducts an initial evidence assessment identifying which three to five criteria your current profile can best support, and which evidence types would be most compelling for the final merits argument. That assessment drives the PR strategy — the types of placements, speaking engagements, and judging credits to prioritize. The PR firm executes against that strategy, not independently.</p>
+      <p>As evidence is assembled, it should be shared with the attorney in real time — not as a dump of links at the end of the engagement, but as individual exhibits with the supporting documentation (letters, organizer confirmations, circulation data) already prepared and organized. Attorneys who receive well-organized exhibits spend less time preparing and write stronger briefs.</p>
+
+      <h2>When Attorneys and PR Firms Disagree</h2>
+      <p>Occasionally the attorney and the PR strategist will have different views on which placements are most valuable. Usually this reflects different information sets: the attorney knows the legal standard in detail; the PR strategist knows what is achievable in the media and events landscape. The resolution is direct communication. Most good attorneys are happy to explain exactly why they weight certain evidence types — and most good PR strategists will adjust their approach accordingly. If either party is resistant to this conversation, that is a problem.</p>
+    `
+  },
+  {
+    slug: 'after-approval-what-to-do',
+    title: 'After Approval: Building on Your Public Profile Once the Green Card Arrives',
+    category: 'Process',
+    date: '2026-01-06',
+    readTime: 6,
+    author: 'sophia',
+    excerpt: 'The evidence you built for your petition has value that extends well beyond the filing. Here is how to leverage it.',
+    cover: 'https://images.unsplash.com/photo-1507209575474-fa72d0c6b20c?w=1200&h=525&fit=crop',
+    body: `
+      <p>The moment your I-485 is approved, the immigration chapter closes — but the public record you built to support it does not disappear. For most of our clients, the profile they constructed during the petition process turns out to be one of the most valuable professional assets they have ever built, with benefits that extend years beyond the filing.</p>
+
+      <h2>The Compounding Value of Established Media Relationships</h2>
+      <p>A journalist who wrote a feature about you for Forbes has a reference point for future coverage. A conference organizer who invited you to speak once is far more likely to invite you again. An editor at a specialist publication who published your expert commentary will remember you the next time a relevant story breaks. The relationships and credentials established during the petition process are the foundation of a professional reputation that compounds over time.</p>
+      <p>Many of our clients who received green cards two or three years ago are now regular Forbes contributors, keynote speakers at the conferences where they first appeared as panelists, and advisory board members at companies where they first connected through judging roles. None of this was the original goal — but all of it was made possible by the profile-building that started with a visa case.</p>
+
+      <h2>Citizenship Considerations</h2>
+      <p>If you plan to pursue naturalization — which requires five years of permanent residence, or three years if married to a US citizen — the public profile you maintain during that period is entirely separate from immigration. But a robust professional presence makes the naturalization process smoother in one specific way: it reduces any concerns an officer might have about your ties to the United States. A person with a well-documented professional life in the US, who is writing for American publications, speaking at American conferences, and recognized in American industry communities, has a presence that speaks for itself.</p>
+
+      <h2>Mentoring the Next Wave</h2>
+      <p>A final note. Many of our most successful clients eventually refer colleagues who are earlier in the same journey. The perspective you gained going through this process — understanding what the standards actually require, how media placements are constructed, what makes a conference speaking credit legitimate — is genuinely valuable to others navigating the same path. Several of our clients have formalized that value through advisory relationships, speaking about the process, or writing about their experience. That kind of recognized expertise in the immigration preparation domain can itself become part of a subsequent professional narrative, if the path ever extends to citizenship or beyond.</p>
+    `
+  }
+];
+
+// ─── Utility ───────────────────────────────────────────────────────────────
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function getSlug() {
+  return new URLSearchParams(window.location.search).get('slug');
+}
+
+function navigate(slug) {
+  const url = slug ? `?slug=${slug}` : window.location.pathname;
+  history.pushState({}, '', url);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Listing view ──────────────────────────────────────────────────────────
+
+let activeFilter = 'all';
+
+function renderListing() {
+  document.getElementById('listing').classList.remove('hidden');
+  document.getElementById('article-view').classList.remove('active');
+  document.getElementById('article-view').innerHTML = '';
+
+  const filtered = activeFilter === 'all'
+    ? ARTICLES
+    : ARTICLES.filter(a => a.category === activeFilter);
+
+  const [featured, ...rest] = filtered;
+
+  // Featured
+  const featuredSlot = document.getElementById('featured-slot');
+  if (featured) {
+    featuredSlot.innerHTML = `
+      <div class="featured-article" onclick="navigate('${featured.slug}')" role="article" tabindex="0">
+        <div class="featured-img-wrap">
+          <img class="featured-img" src="${featured.cover}" alt="${featured.title}" loading="lazy">
+        </div>
+        <div class="featured-body">
+          <div class="article-cat">${featured.category}</div>
+          <h2 class="featured-heading">${featured.title}</h2>
+          <p class="article-excerpt">${featured.excerpt}</p>
+          <div class="article-meta">
+            <span>${formatDate(featured.date)}</span>
+            <span>${featured.readTime} min read</span>
+          </div>
+          <a class="read-more" onclick="event.stopPropagation(); navigate('${featured.slug}')">
+            Read article
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5"/></svg>
+          </a>
+        </div>
+      </div>
+    `;
+  } else {
+    featuredSlot.innerHTML = '';
+  }
+
+  // Grid
+  const gridSlot = document.getElementById('grid-slot');
+  if (rest.length === 0) {
+    gridSlot.innerHTML = '<p style="padding:2rem;color:var(--text-3);">No articles in this category yet.</p>';
+    return;
+  }
+  gridSlot.innerHTML = rest.map(a => `
+    <article class="article-card" onclick="navigate('${a.slug}')" tabindex="0">
+      <div class="article-cat">${a.category}</div>
+      <h2 class="article-card-heading">${a.title}</h2>
+      <p class="article-card-excerpt">${a.excerpt}</p>
+      <div class="article-meta">
+        <span>${formatDate(a.date)}</span>
+        <span>${a.readTime} min</span>
+      </div>
+    </article>
+  `).join('');
+}
+
+// ─── Article view ──────────────────────────────────────────────────────────
+
+function renderArticle(slug) {
+  const article = ARTICLES.find(a => a.slug === slug);
+  if (!article) { navigate(null); return; }
+
+  document.getElementById('listing').classList.add('hidden');
+  const view = document.getElementById('article-view');
+  view.classList.add('active');
+
+  const author = AUTHORS[article.author];
+
+  const related = ARTICLES
+    .filter(a => a.slug !== slug && a.category === article.category)
+    .slice(0, 3);
+
+  view.innerHTML = `
+    <div class="article-hero">
+      <nav class="article-breadcrumb" aria-label="Breadcrumb">
+        <a href="javascript:void(0)" onclick="navigate(null)">The Record</a>
+        <span class="article-breadcrumb-sep">›</span>
+        <span>${article.category}</span>
+        <span class="article-breadcrumb-sep">›</span>
+        <span>${article.title}</span>
+      </nav>
+      <div class="article-main-cat">${article.category}</div>
+      <h1 class="article-main-title">${article.title}</h1>
+      <div class="article-main-meta">
+        <div class="article-author-block">
+          <div class="article-author-avatar">
+            <img src="${author.avatar}" alt="${author.name}" loading="lazy">
+          </div>
+          <div>
+            <div class="article-author-name">${author.name}</div>
+            <div class="article-author-role">${author.title}</div>
+          </div>
+        </div>
+        <div class="article-meta-divider"></div>
+        <span class="article-date">${formatDate(article.date)}</span>
+        <div class="article-meta-divider"></div>
+        <span class="article-read-time">${article.readTime} min read</span>
+      </div>
+    </div>
+
+    <div class="article-cover">
+      <img src="${article.cover}" alt="${article.title}" loading="eager">
+    </div>
+
+    <div class="article-body">${article.body}</div>
+
+    ${related.length > 0 ? `
+    <div class="article-related">
+      <div class="article-related-title">Continue reading</div>
+      <div class="related-grid">
+        ${related.map(r => `
+          <div class="related-card" onclick="navigate('${r.slug}')" tabindex="0">
+            <div class="related-card-cat">${r.category}</div>
+            <div class="related-card-title">${r.title}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : ''}
+  `;
+}
+
+// ─── Filter controls ───────────────────────────────────────────────────────
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    history.pushState({}, '', window.location.pathname);
+    renderListing();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ─── Keyboard navigation ───────────────────────────────────────────────────
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'Escape' && getSlug()) navigate(null);
+});
+
+// ─── Main render ───────────────────────────────────────────────────────────
+
+function render() {
+  const slug = getSlug();
+  if (slug) {
+    renderArticle(slug);
+  } else {
+    renderListing();
+  }
+}
+
+window.addEventListener('popstate', render);
+render();
+</script>
+</body>
+</html>
