@@ -1740,10 +1740,20 @@
       .blog-preview-header { grid-template-columns: 1fr; }
       .blog-preview-cards { grid-template-columns: 1fr; border-radius: var(--radius); }
 
-      /* Hero */
-      .hero-right { display: none; }
-      .hero-faces { display: none; }
-      .hero-portrait-stats { grid-template-columns: repeat(2, 1fr); }
+      /* Hero — show portrait as face banner above text on mobile */
+      .hero-right {
+        display: flex;
+        order: -1;
+      }
+      .hero-portrait {
+        min-height: 0;
+        aspect-ratio: 3/2;
+        border-radius: var(--radius);
+      }
+      .hero-portrait-badge { display: none; }
+      .hero-portrait-stats { display: none; }
+      /* Restore social proof face stack */
+      .hero-faces { display: flex; }
 
       /* Section padding */
       section { padding: 3.5rem 1.25rem; }
