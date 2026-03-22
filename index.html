@@ -118,7 +118,11 @@
 
     a { color: inherit; text-decoration: none; }
 
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* Global overflow guard */
+    *, *::before, *::after { min-width: 0; }
+    body { overflow-wrap: break-word; word-break: break-word; }
 
     /* ─── Skip to content ───────────────────────────────────────────── */
     .skip-link {
@@ -1603,6 +1607,59 @@
     }
     .footer-legal a:hover { color: var(--text-2); }
 
+    /* ─── Blog preview section ──────────────────────────────────────── */
+    .blog-preview-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      margin-bottom: 3rem;
+      gap: 2rem;
+    }
+    .blog-preview-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .blog-preview-card {
+      background: var(--bg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.25s;
+      text-decoration: none;
+    }
+    .blog-preview-card:hover { background: var(--bg-3); }
+    .blog-preview-card-cat {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .blog-preview-card h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .blog-preview-card p {
+      font-size: 0.82rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    .blog-preview-card span {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+
     /* ─── Mobile nav toggle ─────────────────────────────────────────── */
     .nav-burger {
       display: none;
@@ -1670,14 +1727,33 @@
       .footer-bottom { padding: 1.25rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+      /* Single-column card grids */
       .bento-grid { grid-template-columns: 1fr; }
       .bc-1, .bc-2, .bc-3, .bc-4, .bc-5, .bc-6, .bc-7, .bc-8 { grid-column: span 1; }
       .process-grid { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      footer { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
+      .team-intro { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; }
+
+      /* Blog preview */
+      .blog-preview-header { grid-template-columns: 1fr; }
+      .blog-preview-cards { grid-template-columns: 1fr; border-radius: var(--radius); }
+
+      /* Hero */
+      .hero-right { display: none; }
       .hero-faces { display: none; }
+      .hero-portrait-stats { grid-template-columns: repeat(2, 1fr); }
+
+      /* Section padding */
+      section { padding: 3.5rem 1.25rem; }
+      nav { padding: 1rem 1.25rem; }
+      #trust { padding: 1.25rem; }
+
+      /* Prevent text overflow */
+      h1, h2, h3, h4, p, li, span { max-width: 100%; }
+      .section-heading { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+      .hero-heading { font-size: clamp(2rem, 7vw, 3.5rem); }
     }
 
     /* ── Hero social proof faces ───────────────────────────── */
@@ -1739,9 +1815,9 @@
     }
     .team-card-photo {
       width: 100%;
-      aspect-ratio: 3/3.2;
+      aspect-ratio: 3/4;
       object-fit: cover;
-      object-position: top;
+      object-position: top center;
       display: block;
       filter: grayscale(15%);
       transition: filter 0.4s;
@@ -2549,7 +2625,7 @@
   <!-- ─── FOOTER ────────────────────────────────────────────────── -->
     <!-- ─── BLOG PREVIEW ─────────────────────────────────────────── -->
     <section id="blog-preview" aria-labelledby="blog-preview-heading" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-2);">
-      <div style="display:grid;grid-template-columns:1fr auto;align-items:end;margin-bottom:3rem;gap:2rem;">
+      <div class="blog-preview-header">
         <div class="reveal-left">
           <div class="section-label">The Record</div>
           <h2 class="section-heading" id="blog-preview-heading">
@@ -2561,24 +2637,24 @@
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 7h9M8 3.5 11.5 7 8 10.5"/></svg>
         </a>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-        <a href="/blog/?slug=what-uscis-looks-for-eb1a" class="reveal" style="background:var(--bg);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:background 0.25s;text-decoration:none;" onmouseenter="this.style.background='var(--bg-3)'" onmouseleave="this.style.background='var(--bg)'">
-          <span style="font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Strategy</span>
-          <h3 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;letter-spacing:-0.02em;line-height:1.3;color:var(--text);">What USCIS Actually Looks for in an EB-1A Petition</h3>
-          <p style="font-size:0.82rem;color:var(--text-3);line-height:1.6;">The extraordinary ability standard is misunderstood by most applicants. Here is what adjudicators are actually measuring.</p>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);">9 min read</span>
+      <div class="blog-preview-cards">
+        <a href="/blog/?slug=what-uscis-looks-for-eb1a" class="blog-preview-card reveal">
+          <span class="blog-preview-card-cat">Strategy</span>
+          <h3>What USCIS Actually Looks for in an EB-1A Petition</h3>
+          <p>The extraordinary ability standard is misunderstood by most applicants. Here is what adjudicators are actually measuring.</p>
+          <span>9 min read</span>
         </a>
-        <a href="/blog/?slug=judging-criterion-explained" class="reveal delay-1" style="background:var(--bg);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:background 0.25s;text-decoration:none;" onmouseenter="this.style.background='var(--bg-3)'" onmouseleave="this.style.background='var(--bg)'">
-          <span style="font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Evidence</span>
-          <h3 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;letter-spacing:-0.02em;line-height:1.3;color:var(--text);">The Judging Criterion: Why Hackathon Panels Carry More Weight Than You Think</h3>
-          <p style="font-size:0.82rem;color:var(--text-3);line-height:1.6;">Criterion 4 is one of the most accessible and least understood evidence types for EB-1A and O-1A.</p>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);">8 min read</span>
+        <a href="/blog/?slug=judging-criterion-explained" class="blog-preview-card reveal delay-1">
+          <span class="blog-preview-card-cat">Evidence</span>
+          <h3>The Judging Criterion: Why Hackathon Panels Carry More Weight Than You Think</h3>
+          <p>Criterion 4 is one of the most accessible and least understood evidence types for EB-1A and O-1A.</p>
+          <span>8 min read</span>
         </a>
-        <a href="/blog/?slug=how-to-get-published-in-forbes" class="reveal delay-2" style="background:var(--bg);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:background 0.25s;text-decoration:none;" onmouseenter="this.style.background='var(--bg-3)'" onmouseleave="this.style.background='var(--bg)'">
-          <span style="font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Media</span>
-          <h3 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;letter-spacing:-0.02em;line-height:1.3;color:var(--text);">How to Get a Feature Story in Forbes as a Tech Professional</h3>
-          <p style="font-size:0.82rem;color:var(--text-3);line-height:1.6;">A Forbes feature is among the most compelling media placements. Here is what the process actually looks like.</p>
-          <span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-3);">10 min read</span>
+        <a href="/blog/?slug=how-to-get-published-in-forbes" class="blog-preview-card reveal delay-2">
+          <span class="blog-preview-card-cat">Media</span>
+          <h3>How to Get a Feature Story in Forbes as a Tech Professional</h3>
+          <p>A Forbes feature is among the most compelling media placements. Here is what the process actually looks like.</p>
+          <span>10 min read</span>
         </a>
       </div>
     </section>
