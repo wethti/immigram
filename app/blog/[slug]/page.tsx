@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Nav from '@/components/Nav'
 import { ARTICLES, AUTHORS, getArticle, formatDate } from '@/lib/articles'
 
 export async function generateStaticParams() {
@@ -80,66 +81,58 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <Nav />
 
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 3rem', background: 'rgba(12,11,9,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border)' }}>
-        <Link href="/" className="nav-logo">Talentrelo<span>.</span></Link>
-        <ul className="nav-links">
-          <li><Link href="/#services">Services</Link></li>
-          <li><Link href="/#process">How it works</Link></li>
-          <li><Link href="/#packages">Packages</Link></li>
-          <li><Link href="/blog/" style={{ color: 'var(--gold)' }}>Blog</Link></li>
-        </ul>
-        <Link href="/#cta" className="nav-cta">Book a consultation</Link>
-      </nav>
+      <div style={{ paddingTop: '5rem' }}>
 
-      <div id="article-view" className="active" style={{ paddingTop: '5rem' }}>
-        <div className="article-hero">
-          <img className="article-hero-img" src={article.cover} alt={article.title} />
+        {/* Hero image */}
+        <div style={{ maxWidth: 900, margin: '2rem auto 0', padding: '0 2rem' }}>
+          <img
+            src={article.cover}
+            alt={article.title}
+            style={{ width: '100%', borderRadius: 'var(--radius-lg)', display: 'block', maxHeight: 480, objectFit: 'cover' }}
+          />
         </div>
 
-        <div className="article-layout">
-          <div className="article-sidebar">
-            <Link href="/blog/" className="back-link">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M11.5 7h-9M6 3.5 2.5 7 6 10.5" /></svg>
-              All articles
-            </Link>
+        {/* Article content */}
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '2.5rem 2rem 6rem' }}>
+
+          {/* Back link */}
+          <Link href="/blog/" className="back-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-3)', fontSize: '0.85rem', marginBottom: '2rem', fontFamily: 'var(--mono)', letterSpacing: '0.04em' }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M11.5 7h-9M6 3.5 2.5 7 6 10.5" /></svg>
+            All articles
+          </Link>
+
+          {/* Category + title + meta */}
+          <div className="article-cat" style={{ marginBottom: '1rem' }}>{article.category}</div>
+          <h1 className="article-title" style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.025em', color: 'var(--text)', marginBottom: '1.25rem' }}>{article.title}</h1>
+
+          <div className="article-meta" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2.5rem', paddingBottom: '2rem', borderBottom: '1px solid var(--border)' }}>
             {author && (
-              <div className="author-card">
-                <img className="author-avatar" src={author.avatar} alt={author.name} />
-                <div className="author-name">{author.name}</div>
-                <div className="author-title">{author.title}</div>
-                <p className="author-bio">{author.bio}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <img src={author.avatar} alt={author.name} style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }} />
+                <span style={{ color: 'var(--text-2)', fontSize: '0.875rem' }}>{author.name}</span>
               </div>
             )}
-            <div className="sidebar-meta">
-              <div className="article-cat">{article.category}</div>
-              <div style={{ color: 'var(--text-3)', fontSize: '0.8rem', marginTop: '0.5rem' }}>{formatDate(article.date)}</div>
-              <div style={{ color: 'var(--text-3)', fontSize: '0.8rem' }}>{article.readTime} min read</div>
-            </div>
+            <span style={{ color: 'var(--text-3)', fontSize: '0.8rem' }}>{formatDate(article.date)}</span>
+            <span style={{ color: 'var(--text-3)', fontSize: '0.8rem' }}>{article.readTime} min read</span>
           </div>
 
-          <article className="article-body">
-            <div className="article-cat">{article.category}</div>
-            <h1 className="article-title">{article.title}</h1>
-            <div className="article-meta" style={{ marginBottom: '2rem' }}>
-              <span>{formatDate(article.date)}</span>
-              <span>{article.readTime} min read</span>
+          {/* Article body */}
+          <div className="article-body" dangerouslySetInnerHTML={{ __html: article.body }} />
+
+          {/* FAQ */}
+          {article.faq && article.faq.length > 0 && (
+            <div className="article-faq" style={{ marginTop: '3rem', borderTop: '1px solid var(--border)', paddingTop: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--serif)', fontSize: '1.75rem', fontWeight: 500, marginBottom: '1.5rem', color: 'var(--text)' }}>Frequently Asked Questions</h2>
+              {article.faq.map((item, i) => (
+                <div key={i} style={{ marginBottom: '1.75rem' }}>
+                  <h3 style={{ color: 'var(--text)', fontWeight: 500, marginBottom: '0.5rem', fontSize: '1rem' }}>{item.q}</h3>
+                  <p style={{ color: 'var(--text-2)', lineHeight: 1.7, fontSize: '0.95rem' }}>{item.a}</p>
+                </div>
+              ))}
             </div>
-
-            <div dangerouslySetInnerHTML={{ __html: article.body }} />
-
-            {article.faq && article.faq.length > 0 && (
-              <div className="article-faq">
-                <h2>Frequently Asked Questions</h2>
-                {article.faq.map((item, i) => (
-                  <div key={i} className="article-faq-item">
-                    <h3>{item.q}</h3>
-                    <p>{item.a}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </article>
+          )}
         </div>
       </div>
 
